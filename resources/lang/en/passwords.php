@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset'    => 'Your password has been reset!',
-    'sent'     => 'We have e-mailed your password reset link!',
-    'token'    => 'This password reset token is invalid.',
-    'user'     => 'We can\'t find a user with that e-mail address.',
-    'updated'  => 'Your password has been changed!',
+    'password' => 'رمز عبور باید حداقل شش کاراکتر باشد و با تأییدیه مطابقت داشته باشد.',
+    'reset'    => 'رمز عبور شما بازنشانی شد!',
+    'sent'     => 'لینک بازنشانی رمز عبور به ایمیل شما ارسال شد!',
+    'token'    => 'این توکن بازنشانی رمز عبور نامعتبر است.',
+    'user'     => 'کاربری با این آدرس ایمیل یافت نشد.',
+    'updated'  => 'رمز عبور شما تغییر کرد!',
 ];

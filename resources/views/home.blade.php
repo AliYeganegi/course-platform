@@ -6,8 +6,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <p>Courses</p>
-                    <h2>Newest Courses</h2>
+                    <p>{{ __('main.courses') }}</p>
+                    <h2>{{ __('main.newest_courses') }}</h2>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                                     <div class="author_img">
                                         <img src="{{ optional($course->institution->logo)->thumbnail ?? asset('img/no_image.png') }}" alt="" class="rounded-circle">
                                         <div class="author_info_text">
-                                            <p>Institution</p>
+                                            <p>{{ __('main.institution') }}</p>
                                             <h5><a href="{{ route('courses.index') }}?institution={{ $course->institution->id }}">{{ $course->institution->name }}</a></h5>
                                         </div>
                                     </div>
@@ -47,8 +47,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <p>Institutions</p>
-                    <h2>Random Institutions</h2>
+                    <p>{{ __('main.institutions') }}</p>
+                    <h2>{{ __('main.random_institutions') }}</h2>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <h2>Courses</h2>
+                    <h2>{{ __('main.courses') }}</h2>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                                     <div class="author_img">
                                         <img src="{{ optional($course->institution->logo)->thumbnail ?? asset('img/no_image.png') }}" alt="" class="rounded-circle">
                                         <div class="author_info_text">
-                                            <p>Institution</p>
+                                            <p>{{ __('main.institution') }}</p>
                                             <h5><a href="{{ route('courses.index') }}?institution={{ $course->institution->id }}">{{ $course->institution->name }}</a></h5>
                                         </div>
                                     </div>

@@ -10,7 +10,7 @@
                     <img class="img-fluid" src="{{ optional($course->photo)->getUrl() ?? asset('img/no_image.png') }}" alt="">
                 </div>
                 <div class="content_wrapper">
-                    <h4 class="title_top">Description</h4>
+                    <h4 class="title_top">{{ __('main.description') }}</h4>
                     <div class="content">
                         {{ $course->description ?? 'No description provided' }}
                     </div>
@@ -24,20 +24,20 @@
                         @if($course->institution)
                             <li>
                                 <a class="justify-content-between d-flex">
-                                    <p>Institution</p>
+                                    <p>{{ __('main.institution') }}</p>
                                     <span class="color">{{ $course->institution->name }}</span>
                                 </a>
                             </li>
                         @endif
                         <li>
                             <a class="justify-content-between d-flex">
-                                <p>Course Fee </p>
+                                <p>{{ __('main.course_fee') }} </p>
                                 <span>{{ $course->getPrice() }}</span>
                             </a>
                         </li>
 
                     </ul>
-                    <a href="{{ route('enroll.create', $course->id) }}" class="btn_1 d-block">Enroll the course</a>
+                    <a href="{{ route('enroll.create', $course->id) }}" class="btn_1 d-block">{{__('main.enroll')}}</a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-5">
                 <div class="section_tittle text-center">
-                    <h2>My Course Enrollment Applications</h2>
+                    <h2>{{ __('main.enrollment_application') }}</h2>
                 </div>
             </div>
         </div>
@@ -27,14 +27,14 @@
                                     <div class="author_img">
                                         <img src="{{ optional($enrollment->course->institution->logo)->thumbnail ?? asset('img/no_image.png') }}" alt="" class="rounded-circle">
                                         <div class="author_info_text">
-                                            <p>Institution</p>
+                                            <p>{{ __('main.institution') }}</p>
                                             <h5><a href="{{ route('courses.index') }}?institution={{ $enrollment->course->institution->id }}">{{ $enrollment->course->institution->name }}</a></h5>
                                         </div>
                                     </div>
                                 </div>
                             @endif
                             <div class="author_info">
-                                <p>Status:</p>
+                                <p>{{ __('main.status') }}</p>
                                 <h5>{{ App\Enrollment::STATUS_RADIO[$enrollment->status] }}</h5>
                             </div>
                         </div>

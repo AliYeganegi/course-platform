@@ -5,7 +5,7 @@
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
                         <h2>{{ $breadcrumb }}</h2>
-                        <p><a href="{{ route('home') }}">Home</a><span>/</span><a href="{{ url()->current() }}">{{ $breadcrumb }}</a></p>
+                        <p><a href="{{ route('home') }}">{{ __('main.home') }}</a><span>/</span><a href="{{ url()->current() }}">{{ $breadcrumb }}</a></p>
                     </div>
                 </div>
             </div>

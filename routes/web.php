@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fa'])) {
+        session()->put('locale', $locale);
+    }
+    return redirect()->back();
+});
+
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));

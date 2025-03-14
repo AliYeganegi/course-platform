@@ -50,10 +50,9 @@
                     </div>
                 </li>
             @endif
-
-
         </ul>
     </header>
+
 
     <div class="app-body">
         @include('partials.menu')
