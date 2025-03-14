@@ -13,31 +13,32 @@
         </div>
         <div class="row">
             @foreach($newestCourses as $course)
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="{{ optional($course->photo)->getUrl() ?? asset('img/no_image.png') }}" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            @foreach($course->disciplines as $discipline)
-                                <a href="{{ route('courses.index') }}?discipline={{ $discipline->id }}" class="btn_4 mr-1 mb-1">{{ $discipline->name }}</a>
-                            @endforeach
-                            <h4>{{ $course->getPrice() }}</h4>
-                            <a href="{{ route('courses.show', $course->id) }}"><h3>{{ $course->name }}</h3></a>
-                            <p>{{ Str::limit($course->description, 100) }}</p>
-                            @if($course->institution)
-                                <div class="author_info">
-                                    <div class="author_img">
-                                        <img src="{{ optional($course->institution->logo)->thumbnail ?? asset('img/no_image.png') }}" alt="" class="rounded-circle">
-                                        <div class="author_info_text">
-                                            <p>{{ __('main.institution') }}</p>
-                                            <h5><a href="{{ route('courses.index') }}?institution={{ $course->institution->id }}">{{ $course->institution->name }}</a></h5>
-                                        </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="single_special_cource">
+                    <img src="{{ $course->photo->getUrl() ?? asset('img/no_image.png') }}" class="special_img" alt="">
+                    <div class="special_cource_text">
+                        @foreach($course->disciplines as $discipline)
+                            <a href="{{ route('courses.index') }}?discipline={{ $discipline->id }}" class="btn_4 mr-1 mb-1">{{ $discipline->name }}</a>
+                        @endforeach
+                        <h4>{{ $course->getPrice() }}</h4>
+                        <a href="{{ route('courses.show', $course->id) }}"><h3>{{ $course->name }}</h3></a>
+                        <p>{{ Str::limit($course->description, 100) }}</p>
+                        @if($course->institution)
+                            <div class="author_info">
+                                <div class="author_img">
+                                    <img src="{{ optional($course->institution->logo)->thumbnail ?? asset('img/no_image.png') }}" alt="" class="rounded-circle">
+                                    <div class="author_info_text">
+                                        <p>{{ __('main.institution') }}</p>
+                                        <h5><a href="{{ route('courses.index') }}?institution={{ $course->institution->id }}">{{ $course->institution->name }}</a></h5>
                                     </div>
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
-            @endforeach
+            </div>
+        @endforeach
+
         </div>
     </div>
 </section>
