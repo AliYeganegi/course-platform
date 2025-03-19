@@ -24,7 +24,7 @@ class ForgotPasswordController extends Controller
     protected function redirectTo()
     {
         if (Auth::user()->role === 'admin') {
-            return redirect()->route('admin.home');
+            return '/home';
         }
         return '/';
     }

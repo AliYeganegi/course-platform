@@ -24,53 +24,64 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('courses.index') }}">{{ __('main.courses') }}</a>
                             </li>
-                            @if($menuDisciplines->count())
+                            @if ($menuDisciplines->count())
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         {{ __('main.disciplines') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        @foreach($menuDisciplines as $id=>$discipline)
-                                            <a class="dropdown-item" href="{{ route('courses.index') }}?discipline={{ $id }}">{{ $discipline }}</a>
+                                        @foreach ($menuDisciplines as $id => $discipline)
+                                            <a class="dropdown-item"
+                                                href="{{ route('courses.index') }}?discipline={{ $id }}">{{ $discipline }}</a>
                                         @endforeach
                                     </div>
                                 </li>
                             @endif
-                            @if($menuInstitutions->count())
+                            @if ($menuInstitutions->count())
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         {{ __('main.institutions') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        @foreach($menuInstitutions as $id=>$institution)
-                                            <a class="dropdown-item" href="{{ route('courses.index') }}?institution={{ $id }}">{{ $institution }}</a>
+                                        @foreach ($menuInstitutions as $id => $institution)
+                                            <a class="dropdown-item"
+                                                href="{{ route('courses.index') }}?institution={{ $id }}">{{ $institution }}</a>
                                         @endforeach
                                     </div>
                                 </li>
                             @endif
                             @auth
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('enroll.myCourses') }}">{{ __('main.my_courses') }}</a>
-                                </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
-                                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
-                            @endauth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('enroll.myCourses') }}">{{ __('main.my_courses') }}</a>
+                            </li>
+                            <li class="d-none d-lg-block">
+                                <a class="btn_1" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
+                                <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @else
+                            <li class="d-none d-lg-block">
+                                <a class="btn_1" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endauth
 
-                            <!-- Language Switcher -->
-                            <li class="nav-item">
-                                <a href="{{ url('lang/en') }}" class="nav-link">English</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('lang/fa') }}" class="nav-link">فارسی</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+
+                        <!-- Language Switcher -->
+                        <li class="nav-item">
+                            <a href="{{ url('lang/en') }}" class="nav-link">English</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('lang/fa') }}" class="nav-link">فارسی</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
+</div>
 </header>
