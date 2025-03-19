@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Spatie\FlareClient\View;
+
 use App\Course;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,8 +21,7 @@ class EnrollmentController extends Controller
 
     public function store(Request $request, Course $course)
     {
-        if(auth()->guest())
-        {
+        if (auth()->guest()) {
             $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
@@ -34,7 +36,13 @@ class EnrollmentController extends Controller
 
             auth()->login($user);
         }
-        
+
+        $existingEnrollment = $course->enrollments()->where('user_id', auth()->user()->id)->first();
+
+        if ($existingEnrollment) {
+            return redirect()->route('enroll.myCourses')->with('message', 'You are already enrolled in this course!');
+        }
+
         $course->enrollments()->create(['user_id' => auth()->user()->id]);
 
         return redirect()->route('enroll.myCourses');

@@ -16,4 +16,5 @@ return [
     'description' => 'Description',
     'course_fee' => 'Course Fee',
     'enroll' => 'Enroll the course',
+    'duplicate_enroll' => 'You already have enrolled this course',
 ];

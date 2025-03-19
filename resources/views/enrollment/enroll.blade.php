@@ -4,6 +4,7 @@
 <div class="whole-wrap">
     <div class="container box_1170">
         <div class="section-top-border">
+            <!-- Show validation errors if any -->
             @if($errors->any())
                 <div class="alert alert-danger" role="alert">
                     @foreach ($errors->all() as $error)
@@ -11,6 +12,13 @@
                     @endforeach
                 </div>
             @endif
+
+            @if(session('message'))
+                <div class="alert alert-warning" role="alert">
+                    {{ session('message') }}
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <h3 class="mb-30">{{ __('main.submit_enrollment') }}</h3>

@@ -16,4 +16,5 @@ return [
     'description' => 'توضیحات',
     'course_fee' => 'هزینه دوره',
     'enroll' => 'ثبت نام دوره',
+    'duplicate_enroll' => 'شما قبلا در این دوره ثبت نام کرده اید',
 ];
