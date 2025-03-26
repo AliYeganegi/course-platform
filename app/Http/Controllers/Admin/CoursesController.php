@@ -12,6 +12,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Institution;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class CoursesController extends Controller
