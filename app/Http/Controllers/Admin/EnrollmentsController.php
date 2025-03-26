@@ -61,7 +61,7 @@ class EnrollmentsController extends Controller
     {
         $enrollment->update($request->all());
 
-        if ($enrollment->status == 'accepted') {
+        if ($enrollment->status == 'accepted' && $enrollment->course->course_link != null) {
             $courseRegisterService = new CourseRegisterService(new EmailService);
             $courseRegisterService->sendInvitationLink($enrollment->user->email, $enrollment->course);
         }

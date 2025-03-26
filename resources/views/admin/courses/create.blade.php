@@ -72,8 +72,17 @@
                         {{ $errors->first('price') }}
                     </em>
                 @endif
+            </div>
+            <div class="form-group {{ $errors->has('course_link') ? 'has-error' : '' }}">
+                <label for="course_link">{{ trans('course_link') }}</label>
+                <input type="url" id="course_link" name="course_link" class="form-control" value="{{ old('course_link', isset($course) ? $course->course_link : '') }}">
+                @if($errors->has('course_link'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('course_link') }}
+                    </em>
+                @endif
                 <p class="helper-block">
-                    {{ trans('cruds.course.fields.price_helper') }}
+                    {{ trans('course_link') }}
                 </p>
             </div>
             <div class="form-group {{ $errors->has('disciplines') ? 'has-error' : '' }}">
