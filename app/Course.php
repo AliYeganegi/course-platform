@@ -33,6 +33,7 @@ class Course extends Model implements HasMedia
         'deleted_at',
         'description',
         'institution_id',
+        'course_file',
     ];
 
     protected static function boot()

@@ -43,6 +43,12 @@ class CoursesController extends Controller
         $course = Course::create($request->all());
         $course->disciplines()->sync($request->input('disciplines', []));
 
+        if ($request->hasFile('course_file')) {
+            $file = $request->file('course_file');
+            $path = $file->store('courses', 'public');
+            $course->update(['course_file' => $path]);
+        }
+
         if ($request->input('photo', false)) {
             $course->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
         }
@@ -68,16 +74,18 @@ class CoursesController extends Controller
         $course->update($request->all());
         $course->disciplines()->sync($request->input('disciplines', []));
 
-        if ($request->input('photo', false)) {
-            if (!$course->photo || $request->input('photo') !== $course->photo->file_name) {
-                $course->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
+        if ($request->hasFile('course_file')) {
+            if ($course->course_file) {
+                Storage::disk('public')->delete($course->course_file);
             }
-        } elseif ($course->photo) {
-            $course->photo->delete();
+            $file = $request->file('course_file');
+            $path = $file->store('courses', 'public');
+            $course->update(['course_file' => $path]);
         }
 
         return redirect()->route('admin.courses.index');
     }
+
 
     public function show(Course $course)
     {

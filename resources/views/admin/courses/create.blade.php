@@ -94,6 +94,15 @@
                     {{ trans('cruds.course.fields.disciplines_helper') }}
                 </p>
             </div>
+            <div class="form-group">
+                <label for="course_file">Upload Course File (ZIP)</label>
+                <input type="file" name="course_file" class="form-control">
+            </div>
+
+            @if(isset($course) && $course->course_file)
+                <a href="{{ asset('storage/' . $course->course_file) }}" target="_blank">Download Course File</a>
+            @endif
+
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

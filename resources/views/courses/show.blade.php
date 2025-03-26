@@ -15,8 +15,20 @@
                         {{ $course->description ?? 'No description provided' }}
                     </div>
                 </div>
-            </div>
 
+                <!-- File Download Section -->
+                @if($course->file_path)
+                <div class="content_wrapper mt-4">
+                    <h4 class="title_top">{{ __('main.download_material') }}</h4>
+                    <div class="content">
+                        <a href="{{ asset('storage/' . $course->file_path) }}" class="btn btn-primary" download>
+                            {{ __('main.download_file') }}
+                        </a>
+                    </div>
+                </div>
+                @endif
+
+            </div>
 
             <div class="col-lg-4 right-contents">
                 <div class="sidebar_top">
@@ -31,16 +43,16 @@
                         @endif
                         <li>
                             <a class="justify-content-between d-flex">
-                                <p>{{ __('main.course_fee') }} </p>
+                                <p>{{ __('main.course_fee') }}</p>
                                 <span>{{ $course->getPrice() }}</span>
                             </a>
                         </li>
-
                     </ul>
-                    <a href="{{ route('enroll.create', $course->id) }}" class="btn_1 d-block">{{__('main.enroll')}}</a>
+                    <a href="{{ route('enroll.create', $course->id) }}" class="btn_1 d-block">{{ __('main.enroll') }}</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endsection
