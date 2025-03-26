@@ -74,16 +74,13 @@
                 @endif
             </div>
             <div class="form-group {{ $errors->has('course_link') ? 'has-error' : '' }}">
-                <label for="course_link">{{ trans('course_link') }}</label>
+                <label for="course_link">{{ trans('cruds.course.fields.course_link') }}</label>
                 <input type="url" id="course_link" name="course_link" class="form-control" value="{{ old('course_link', isset($course) ? $course->course_link : '') }}">
                 @if($errors->has('course_link'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('course_link') }}
+                        {{ $errors->first('cruds.course.fields.course_link') }}
                     </em>
                 @endif
-                <p class="helper-block">
-                    {{ trans('course_link') }}
-                </p>
             </div>
             <div class="form-group {{ $errors->has('disciplines') ? 'has-error' : '' }}">
                 <label for="disciplines">{{ trans('cruds.course.fields.disciplines') }}

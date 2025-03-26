@@ -127,6 +127,7 @@ return [
             'updated_at_helper'  => '',
             'deleted_at'         => 'حذف شده در',
             'deleted_at_helper'  => '',
+            'course_link'        => 'لینک دوره'
         ],
     ],
     'enrollment'     => [
