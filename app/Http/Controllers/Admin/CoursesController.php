@@ -84,6 +84,18 @@ class CoursesController extends Controller
             $course->update(['course_file' => $path]);
         }
 
+        if ($request->input('photo', false)) {
+            if (!$course->photo || $request->input('photo') !== $course->photo->file_name) {
+                if ($course->photo) {
+                    $course->photo->delete();
+                }
+                $course->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))
+                    ->toMediaCollection('photo');
+            }
+        } elseif ($course->photo) {
+            $course->photo->delete();
+        }
+
         return redirect()->route('admin.courses.index');
     }
 

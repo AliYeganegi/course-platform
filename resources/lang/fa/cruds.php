@@ -127,7 +127,9 @@ return [
             'updated_at_helper'  => '',
             'deleted_at'         => 'حذف شده در',
             'deleted_at_helper'  => '',
-            'course_link'        => 'لینک دوره'
+            'course_link'        => 'لینک دوره',
+            'course_file'        => 'فایل دوره',
+            'course_file_helper' => 'آپلود فایل های مرتبط با دوره (به عنوان مثال، فایل های PDF، ZIP، فیلم ها)',
         ],
     ],
     'enrollment'     => [

@@ -128,6 +128,8 @@ return [
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => '',
             'course_link'        => 'course_link',
+            'course_file'        => 'Course File',
+            'course_file_helper' => 'Upload files related to the course (e.g., PDFs, ZIPs, Videos)',
         ],
     ],
     'enrollment'     => [

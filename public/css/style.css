@@ -15,12 +15,23 @@
 /**************** extend css start ****************/
 /**************** common css start ****************/
 /* line 3, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
-body {
-  font-family: "Roboto", sans-serif;
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
+@keyframes floatAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
 }
+
+body {
+    font-family: "Fredoka One", cursive;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ffeb99, #ffccff, #99ddff, #ffb3b3);
+    background-size: 400% 400%;
+    animation: floatAnimation 10s infinite alternate ease-in-out;
+    color: #333;
+}
+
 
 /* line 9, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 .message_submit_form:focus {
@@ -137,23 +148,40 @@ input:hover, input:focus {
 }
 
 /* line 63, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
-a {
-  text-decoration: none;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
 }
 
-/* line 66, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
+a {
+    color: #ff4081;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
 a:hover {
-  outline: none;
-  text-decoration: none;
+    color: #ffcc00;
+    text-shadow: 0px 0px 10px rgba(255, 200, 0, 0.8);
+    animation: wiggle 0.3s ease-in-out infinite;
 }
 
 /* line 72, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
-h1, h2, h3, h4, h5, h6 {
-  color: #0c2e60;
-  font-family: "Poppins", sans-serif;
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Baloo Paaji 2", cursive;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #fbd75f;
+    animation: bounce 1.5s infinite;
+}
+
 
 /* line 76, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 p {
@@ -663,7 +691,50 @@ ul {
 
 /* line 138, E:/172 Etrain Education/172_Etrain_Education_html/sass/_button.scss */
 .button-link {
-  letter-spacing: 0;
+  letter.button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 60px;
+    border-radius: 30px; /* Rounded corners for a soft look */
+    color: white;
+    background-color: #ff4081; /* Fun pink */
+    border: 3px solid #ffd700; /* Gold border */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect: Button grows slightly */
+.button:hover {
+    transform: scale(1.1);
+    background-color: #ff80ab; /* Lighter pink on hover */
+}
+
+/* Click Effect: Button shrinks slightly */
+.button:active {
+    transform: scale(0.9);
+}
+
+/* Add a fun bounce effect when hovered */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.button:hover {
+    animation: bounce 0.5s ease-in-out infinite;
+}
+
+/* Responsive for mobile */
+@media (max-width: 767px) {
+    .button {
+        font-size: 14px;
+        padding: 10px 30px;
+    }
+}
+-spacing: 0;
   color: #3b1d82;
   border: 0;
   padding: 0;
