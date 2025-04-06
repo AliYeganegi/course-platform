@@ -137,6 +137,7 @@ return [
     'enrollment'     => [
         'title'          => 'ثبت‌نام‌ها',
         'title_singular' => 'ثبت‌نام',
+        'not_enrolled'   => 'ثبت نام نشده',
         'fields'         => [
             'id'                => 'شناسه',
             'id_helper'         => '',

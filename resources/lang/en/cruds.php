@@ -106,6 +106,7 @@ return [
     'course'         => [
         'title'          => 'Courses',
         'title_singular' => 'Course',
+        'not_enrolled'   => 'Not Enrolled',
         'download_material'  => 'Download Course Materials',
         'fields'         => [
             'id'                 => 'ID',

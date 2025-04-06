@@ -43,7 +43,7 @@
                         ][$status] ?? 'secondary';
                     @endphp
                     <span class="badge badge-{{ $statusColor }} text-capitalize">
-                        {{ $status ? __($status) : __('main.not_enrolled') }}
+                        {{ $status ? __($status) : __('cruds.enrollment.not_enrolled') }}
                     </span>
                 </div>
 
