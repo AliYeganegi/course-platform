@@ -54,6 +54,12 @@ class Course extends Model implements HasMedia
         return $this->hasMany(Enrollment::class, 'course_id', 'id');
     }
 
+    public function enrollment()
+    {
+        return $this->hasOne(Enrollment::class)->where('user_id', auth()->id());
+    }
+
+
     public function getPhotoAttribute()
     {
         $file = $this->getMedia('photo')->last();
@@ -78,18 +84,18 @@ class Course extends Model implements HasMedia
 
     public function getPrice()
     {
-        return $this->price ? '$'.number_format($this->price, 2) : 'FREE';
+        return $this->price ? '$' . number_format($this->price, 2) : 'FREE';
     }
 
     public function scopeSearchResults($query)
     {
-        $query->when(request('discipline'), function($query) {
-                $query->whereHas('disciplines', function($query) {
-                    $query->whereId(request('discipline'));
-                });
-            })
-            ->when(request('institution'), function($query) {
-                $query->whereHas('institution', function($query) {
+        $query->when(request('discipline'), function ($query) {
+            $query->whereHas('disciplines', function ($query) {
+                $query->whereId(request('discipline'));
+            });
+        })
+            ->when(request('institution'), function ($query) {
+                $query->whereHas('institution', function ($query) {
                     $query->whereId(request('institution'));
                 });
             });

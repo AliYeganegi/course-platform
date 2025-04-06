@@ -106,6 +106,7 @@ return [
     'course'         => [
         'title'          => 'Courses',
         'title_singular' => 'Course',
+        'download_material'  => 'Download Course Materials',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
@@ -127,7 +128,8 @@ return [
             'updated_at_helper'  => '',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => '',
-            'course_link'        => 'course_link',
+            'course_link'        => 'course Link',
+            'access_course'      => 'Access Course',
             'course_file'        => 'Course File',
             'course_file_helper' => 'Upload files related to the course (e.g., PDFs, ZIPs, Videos)',
         ],

@@ -106,6 +106,7 @@ return [
     'course'         => [
         'title'          => 'دوره‌ها',
         'title_singular' => 'دوره',
+        'download_material'  => 'دانلود محتوای دوره',
         'fields'         => [
             'id'                 => 'شناسه',
             'id_helper'          => '',
@@ -128,6 +129,7 @@ return [
             'deleted_at'         => 'حذف شده در',
             'deleted_at_helper'  => '',
             'course_link'        => 'لینک دوره',
+            'access_course'      => 'ورود به دوره',
             'course_file'        => 'فایل دوره',
             'course_file_helper' => 'آپلود فایل های مرتبط با دوره (به عنوان مثال، فایل های PDF، ZIP، فیلم ها)',
         ],

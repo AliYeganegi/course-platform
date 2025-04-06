@@ -10,10 +10,11 @@ use App\Http\Requests\MassDestroyCourseRequest;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Institution;
-use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
+
 
 class CoursesController extends Controller
 {
@@ -113,7 +114,7 @@ class CoursesController extends Controller
     {
         abort_if(Gate::denies('course_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $course->delete();
+        $course->forceDelete();
 
         return back();
     }
