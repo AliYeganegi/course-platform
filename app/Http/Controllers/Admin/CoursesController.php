@@ -73,31 +73,64 @@ class CoursesController extends Controller
 
     public function update(UpdateCourseRequest $request, Course $course)
     {
+        // Update basic course attributes
         $course->update($request->all());
+
+        // Sync disciplines
         $course->disciplines()->sync($request->input('disciplines', []));
 
+        // Remove course file if requested
+        if ($this->removeCourseFile($request, $course)) {
+            $course->save();
+        }
+
+        // Handle new course file upload
+        $this->uploadCourseFile($request, $course);
+
+        // Handle photo update
+        $this->handlePhoto($request, $course);
+
+        return redirect()->route('admin.courses.index');
+    }
+
+    private function removeCourseFile($request, $course)
+    {
+        if ($request->has('remove_course_file') && $request->remove_course_file == '1') {
+            if ($course->course_file) {
+                Storage::delete('public/' . $course->course_file);
+                $course->course_file = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function uploadCourseFile($request, $course)
+    {
         if ($request->hasFile('course_file')) {
             if ($course->course_file) {
                 Storage::disk('public')->delete($course->course_file);
             }
-            $file = $request->file('course_file');
-            $path = $file->store('courses', 'public');
+            $path = $request->file('course_file')->store('courses', 'public');
             $course->update(['course_file' => $path]);
         }
+    }
 
-        if ($request->input('photo', false)) {
-            if (!$course->photo || $request->input('photo') !== $course->photo->file_name) {
+    private function handlePhoto($request, $course)
+    {
+        $photoInput = $request->input('photo', false);
+
+        if ($photoInput) {
+            if (!$course->photo || $photoInput !== $course->photo->file_name) {
                 if ($course->photo) {
                     $course->photo->delete();
                 }
-                $course->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))
+                $course->addMedia(storage_path('tmp/uploads/' . $photoInput))
                     ->toMediaCollection('photo');
             }
         } elseif ($course->photo) {
             $course->photo->delete();
         }
-
-        return redirect()->route('admin.courses.index');
     }
 
 

@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Course;
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 class StoreCourseRequest extends FormRequest
 {
@@ -33,6 +33,7 @@ class StoreCourseRequest extends FormRequest
             'disciplines'    => [
                 'array',
             ],
+            'course_file'    => 'nullable|file|max:2048000',
         ];
     }
 }

@@ -138,6 +138,7 @@ return [
     'enrollment'     => [
         'title'          => 'Enrollments',
         'title_singular' => 'Enrollment',
+         'not_enrolled'   => 'Not Enrolled',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
