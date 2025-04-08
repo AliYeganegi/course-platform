@@ -108,6 +108,9 @@ return [
         'title_singular' => 'Course',
         'not_enrolled'   => 'Not Enrolled',
         'download_material'  => 'Download Course Materials',
+        'current_file'       => 'Current File:',
+        'file_remove'        => 'Remove',
+        'chosen_file_remove'        => 'Remove Chosen File',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',

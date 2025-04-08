@@ -110,7 +110,7 @@
                 <div class="form-group">
                     <label for="course_file">Upload Course File (ZIP)</label>
                     <input type="file" name="course_file" id="course_file" class="form-control">
-                    <button type="button" id="clear-course-file" class="btn btn-warning btn-sm mt-2">Remove File</button>
+                    <button type="button" id="clear-course-file" class="btn btn-warning btn-sm mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
                 </div>
 
 

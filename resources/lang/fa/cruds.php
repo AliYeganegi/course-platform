@@ -107,6 +107,9 @@ return [
         'title'          => 'دوره‌ها',
         'title_singular' => 'دوره',
         'download_material'  => 'دانلود محتوای دوره',
+        'current_file'       => 'فایل فعلی:',
+        'file_remove'        => 'حذف',
+        'chosen_file_remove'        => 'حذف فایل انتخابی',
         'fields'         => [
             'id'                 => 'شناسه',
             'id_helper'          => '',

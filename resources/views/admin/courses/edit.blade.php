@@ -131,12 +131,12 @@
                     <!-- Display existing file if there is one -->
                     @if (isset($course) && $course->course_file)
                         <div class="mt-2">
-                            <strong>Current File:</strong>
+                            <strong>{{ trans('cruds.course.current_file') }}</strong>
                             <a href="{{ asset('storage/' . $course->course_file) }}" target="_blank">
                                 {{ basename($course->course_file) }}
                             </a>
                             <button type="button" id="remove-existing-course-file"
-                                class="btn btn-sm btn-danger ml-2">Remove</button>
+                                class="btn btn-sm btn-danger ml-2">{{ trans('cruds.course.file_remove') }}</button>
                             <input type="hidden" name="remove_course_file" id="remove_course_file" value="0">
                         </div>
                     @endif
@@ -144,8 +144,7 @@
                     <!-- File input for uploading new course file -->
                     <input type="file" name="course_file" class="form-control" id="course_file_input">
 
-                    <button type="button" id="clear-course-file" class="btn btn-sm btn-warning mt-2">Clear Selected
-                        File</button>
+                    <button type="button" id="clear-course-file" class="btn btn-sm btn-warning mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
 
                     @if ($errors->has('course_file'))
                         <em class="invalid-feedback">
