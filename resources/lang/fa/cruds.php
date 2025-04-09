@@ -135,6 +135,12 @@ return [
             'access_course'      => 'ورود به دوره',
             'course_file'        => 'فایل دوره',
             'course_file_helper' => 'آپلود فایل های مرتبط با دوره (به عنوان مثال، فایل های PDF، ZIP، فیلم ها)',
+            'prerequisites'      => 'پیش نیازها',
+            'course_topics'      => 'موضوعات دوره',
+            'target_audience'    => 'مخاطب هدف',
+            'course_duration'    => 'مدت دوره',
+            'learning_outcomes'  => 'نتایج یادگیری',
+            'instructor_id'      => 'مدرس',
         ],
     ],
     'enrollment'     => [

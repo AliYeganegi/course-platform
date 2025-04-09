@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Gate;
-
+use App\User;
 
 class CoursesController extends Controller
 {
@@ -37,7 +37,11 @@ class CoursesController extends Controller
 
         $disciplines = Discipline::all()->pluck('name', 'id');
 
-        return view('admin.courses.create', compact('institutions', 'disciplines'));
+        $users = User::whereHas('roles', function ($query) {
+            $query->whereIn('title', ['admin', 'Institution']);
+        })->pluck('name', 'id');
+
+        return view('admin.courses.create', compact('institutions', 'disciplines', 'users'));
     }
 
     public function store(StoreCourseRequest $request)
@@ -68,7 +72,12 @@ class CoursesController extends Controller
 
         $course->load('institution', 'disciplines');
 
-        return view('admin.courses.edit', compact('institutions', 'disciplines', 'course'));
+        $users = User::whereHas('roles', function ($query) {
+            $query->whereIn('title', ['admin', 'Institution']);
+        })->pluck('name', 'id');
+
+
+        return view('admin.courses.edit', compact('institutions', 'disciplines', 'course', 'users'));
     }
 
     public function update(UpdateCourseRequest $request, Course $course)

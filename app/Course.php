@@ -35,6 +35,12 @@ class Course extends Model implements HasMedia
         'institution_id',
         'course_file',
         'course_link',
+        'learning_outcomes',
+        'target_audience',
+        'instructor_id',
+        'course_duration',
+        'course_topics',
+        'prerequisites',
     ];
 
     protected static function boot()

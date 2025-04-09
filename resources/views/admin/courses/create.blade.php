@@ -48,6 +48,77 @@
                         {{ trans('cruds.course.fields.photo_helper') }}
                     </p>
                 </div>
+                <!-- New fields start -->
+                <div class="form-group {{ $errors->has('learning_outcomes') ? 'has-error' : '' }}">
+                    <label for="learning_outcomes">{{ trans('cruds.course.fields.learning_outcomes') }}</label>
+                    <textarea id="learning_outcomes" name="learning_outcomes" class="form-control">{{ old('learning_outcomes', isset($course) ? $course->learning_outcomes : '') }}</textarea>
+                    @if ($errors->has('learning_outcomes'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('learning_outcomes') }}
+                        </em>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('target_audience') ? 'has-error' : '' }}">
+                    <label for="target_audience">{{ trans('cruds.course.fields.target_audience') }}</label>
+                    <textarea id="target_audience" name="target_audience" class="form-control">{{ old('target_audience', isset($course) ? $course->target_audience : '') }}</textarea>
+                    @if ($errors->has('target_audience'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('target_audience') }}
+                        </em>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('instructor_id') ? 'has-error' : '' }}">
+                    <label for="instructor_id">{{ trans('cruds.course.fields.instructor') }}</label>
+                    <select name="instructor_id" id="instructor_id" class="form-control select2">
+                        <option value="">Select Instructor</option>
+                        @foreach ($users as $id => $instructor)
+                            <option value="{{ $id }}"
+                                {{ (isset($course) && $course->instructor_id == $id) || old('instructor_id') == $id ? 'selected' : '' }}>
+                                {{ $instructor }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @if ($errors->has('instructor_id'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('instructor_id') }}
+                        </em>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('course_duration') ? 'has-error' : '' }}">
+                    <label for="course_duration">{{ trans('cruds.course.fields.course_duration') }}</label>
+                    <input type="text" id="course_duration" name="course_duration" class="form-control"
+                        value="{{ old('course_duration', isset($course) ? $course->course_duration : '') }}">
+                    @if ($errors->has('course_duration'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('course_duration') }}
+                        </em>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('course_topics') ? 'has-error' : '' }}">
+                    <label for="course_topics">{{ trans('cruds.course.fields.course_topics') }}</label>
+                    <textarea id="course_topics" name="course_topics" class="form-control">{{ old('course_topics', isset($course) ? $course->course_topics : '') }}</textarea>
+                    @if ($errors->has('course_topics'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('course_topics') }}
+                        </em>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('prerequisites') ? 'has-error' : '' }}">
+                    <label for="prerequisites">{{ trans('cruds.course.fields.prerequisites') }}</label>
+                    <textarea id="prerequisites" name="prerequisites" class="form-control">{{ old('prerequisites', isset($course) ? $course->prerequisites : '') }}</textarea>
+                    @if ($errors->has('prerequisites'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('prerequisites') }}
+                        </em>
+                    @endif
+                </div>
+                <!-- New fields end -->
                 @if (auth()->user()->isInstitution())
                     <input type="hidden" name="institution_id" value="{{ auth()->user()->institution_id }}">
                 @else
@@ -110,7 +181,8 @@
                 <div class="form-group">
                     <label for="course_file">Upload Course File (ZIP)</label>
                     <input type="file" name="course_file" id="course_file" class="form-control">
-                    <button type="button" id="clear-course-file" class="btn btn-warning btn-sm mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
+                    <button type="button" id="clear-course-file"
+                        class="btn btn-warning btn-sm mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
                 </div>
 
 

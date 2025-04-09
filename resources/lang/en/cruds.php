@@ -136,6 +136,12 @@ return [
             'access_course'      => 'Access Course',
             'course_file'        => 'Course File',
             'course_file_helper' => 'Upload files related to the course (e.g., PDFs, ZIPs, Videos)',
+            'prerequisites'      => 'Prerequisites',
+            'course_topics'      => 'Course Topics',
+            'target_audience'    => 'Target Audience',
+            'course_duration'    => 'Course Duration',
+            'learning_outcomes'  => 'Learning Outcomes',
+            'instructor_id'      => 'Instructor',
         ],
     ],
     'enrollment'     => [

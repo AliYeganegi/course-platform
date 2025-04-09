@@ -34,6 +34,14 @@ class StoreCourseRequest extends FormRequest
                 'array',
             ],
             'course_file'    => 'nullable|file|max:2048000',
+            'description'       => ['nullable', 'string'],
+            'learning_outcomes' => ['nullable', 'string'],
+            'learning_outcomes' => ['nullable', 'string'],
+            'target_audience'   => ['nullable', 'string'],
+            'course_topics'     => ['nullable', 'string'],
+            'prerequisites'     => ['nullable', 'string'],
+            'course_link'       => ['nullable', 'url'],
+            'file_path'         => ['nullable', 'string'],
         ];
     }
 }
