@@ -94,7 +94,7 @@
                     <div class="card shadow-sm rounded p-3 mb-4">
 
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('main.description') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('main.description') }}</h4>
                                 <div class="content">
                                     {{ $course->description ?? '-----------------------------------------' }}
                                 </div>
@@ -102,7 +102,7 @@
 
                         <!-- Learning Outcomes -->
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('cruds.course.fields.learning_outcomes') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.learning_outcomes') }}</h4>
                                 <div class="content">
                                     @if ($course->learning_outcomes)
                                         <p>{{ $course->learning_outcomes }}</p>
@@ -112,7 +112,7 @@
                                 </div>
                         </div <!-- Target Audience -->
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('cruds.course.fields.target_audience') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.target_audience') }}</h4>
                                 <div class="content">
                                     @if ($course->target_audience)
                                         @foreach (preg_split("/\r\n|\n|\r/", $course->target_audience ?? '') as $audience)
@@ -128,7 +128,7 @@
 
                         <!-- Course Duration -->
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('cruds.course.fields.course_duration') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_duration') }}</h4>
                                 <div class="content">
                                     {{ $course->course_duration ?? '------------------------------' }}
                                 </div>
@@ -136,7 +136,7 @@
 
                         {{-- course_topics --}}
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('cruds.course.fields.course_topics') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_topics') }}</h4>
                                 <div class="content">
                                     @if ($course->course_topics)
                                         @foreach (preg_split("/\r\n|\n|\r/", $course->course_topics ?? '') as $topic)
@@ -150,7 +150,7 @@
 
                         {{-- prerequisites --}}
                         <div class="content_wrapper mt-4">
-                            <h5 class="mb-2">{{ __('cruds.course.fields.prerequisites') }}</h4>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.prerequisites') }}</h4>
                                 <div class="content">
                                     @if ($course->prerequisites)
                                         @foreach (preg_split("/\r\n|\n|\r/", $course->prerequisites ?? '') as $prerequisite)
