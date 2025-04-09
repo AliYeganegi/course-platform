@@ -52,6 +52,7 @@ return [
             'email_verified_at'        => 'تأیید ایمیل در',
             'email_verified_at_helper' => '',
             'password'                 => 'رمز عبور',
+            'confirm_password'         => 'تایید رمز عبور',
             'password_helper'          => '',
             'roles'                    => 'نقش‌ها',
             'roles_helper'             => '',
@@ -65,6 +66,8 @@ return [
             'deleted_at_helper'        => '',
             'institution'              => 'مؤسسه',
             'institution_helper'       => '',
+            'phone_number'             => 'شماره موبایل',
+            'date_of_birth'            => 'تاریخ تولد',
         ],
     ],
     'discipline'     => [

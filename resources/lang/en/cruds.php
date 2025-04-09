@@ -52,6 +52,7 @@ return [
             'email_verified_at'        => 'Email verified at',
             'email_verified_at_helper' => '',
             'password'                 => 'Password',
+            'confirm_password'         => 'Confirm Password',
             'password_helper'          => '',
             'roles'                    => 'Roles',
             'roles_helper'             => '',
@@ -65,6 +66,9 @@ return [
             'deleted_at_helper'        => '',
             'institution'              => 'Institution',
             'institution_helper'       => '',
+            'phone_number'             => 'Phone Number',
+            'date_of_birth'            => 'Date Of Birth',
+
         ],
     ],
     'discipline'     => [

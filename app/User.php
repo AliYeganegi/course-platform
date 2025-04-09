@@ -39,6 +39,9 @@ class User extends Authenticatable
         'remember_token',
         'institution_id',
         'email_verified_at',
+        'phone_number',
+        'date_of_birth',
+        'age',
     ];
 
     public function enrollments()

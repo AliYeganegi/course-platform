@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\User;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,6 +35,15 @@ class StoreUserRequest extends FormRequest
             'roles'    => [
                 'required',
                 'array',
+            ],
+            'phone_number'  => [
+                'required',
+                'regex:/^\?[0-9]{10,15}$/',
+            ],
+            'date_of_birth' => [
+                'required',
+                'date',
+                'before:today',
             ],
         ];
     }
