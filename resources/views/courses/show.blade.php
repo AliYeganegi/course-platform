@@ -5,10 +5,27 @@
     <section class="course_details_area section_padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 course_details_left">
+                <div class="col-lg-4 course_details_left">
                     <div class="main_image">
                         <img class="img-fluid" src="{{ optional($course->photo)->getUrl() ?? asset('img/no_image.png') }}"
                             alt="">
+                    </div>
+
+                    {{-- Enrollment Status --}}
+                    <div class="card shadow-sm rounded p-3 mt-4">
+                        <h5 class="mb-2">{{ __('cruds.enrollment.fields.status') }}</h5>
+                        @php
+                            $status = optional($course->enrollment)->status;
+                            $statusColor =
+                                [
+                                    'pending' => 'warning',
+                                    'accepted' => 'success',
+                                    'rejected' => 'danger',
+                                ][$status] ?? 'secondary';
+                        @endphp
+                        <span class="badge badge-{{ $statusColor }} text-capitalize">
+                            {{ $status ? __($status) : __('cruds.enrollment.not_enrolled') }}
+                        </span>
                     </div>
 
                     <!-- File Download Section -->
@@ -73,24 +90,7 @@
                 </div>
 
 
-                <div class="col-lg-4 right-contents">
-                    {{-- Enrollment Status --}}
-                    <div class="card shadow-sm rounded p-3 mb-4">
-                        <h5 class="mb-2">{{ __('cruds.enrollment.fields.status') }}</h5>
-                        @php
-                            $status = optional($course->enrollment)->status;
-                            $statusColor =
-                                [
-                                    'pending' => 'warning',
-                                    'accepted' => 'success',
-                                    'rejected' => 'danger',
-                                ][$status] ?? 'secondary';
-                        @endphp
-                        <span class="badge badge-{{ $statusColor }} text-capitalize">
-                            {{ $status ? __($status) : __('cruds.enrollment.not_enrolled') }}
-                        </span>
-                    </div>
-
+                <div class="col-lg-8 right-contents">
                     <div class="card shadow-sm rounded p-3 mb-4">
 
                         <div class="content_wrapper mt-4">
