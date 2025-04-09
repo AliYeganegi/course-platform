@@ -30,6 +30,8 @@ Route::resource('courses', 'CourseController')->only(['index', 'show']);
 Route::post('courses/{course}/comment', 'CourseController@addComment')->name('courses.comment');
 Route::post('comments/{comment}/reply', 'CourseController@replyToComment')->name('comments.reply');
 Route::post('comments/{comment}/like', 'CourseController@likeComment')->name('comments.like');
+Route::delete('comments/{comment}', 'CommentController@deleteComment')->name('comments.delete');
+
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
