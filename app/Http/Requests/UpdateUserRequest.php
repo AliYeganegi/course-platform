@@ -35,7 +35,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'phone_number'  => [
                 'required',
-                'regex:/^\?[0-9]{10,15}$/',
+                'regex:/^09\d{9}$/',
             ],
             'date_of_birth' => [
                 'required',

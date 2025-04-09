@@ -10,92 +10,133 @@
         <form action="{{ route("admin.users.update", [$user->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($user) ? $user->name : '') }}" required>
-                @if($errors->has('name'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.name_helper') }}
-                </p>
+
+            <!-- Name Field -->
+            <div class="form-group row">
+                <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.name') }}*</label>
+                <div class="col-md-6">
+                    <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror"
+                           value="{{ old('name', isset($user) ? $user->name : '') }}" required>
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label for="email">{{ trans('cruds.user.fields.email') }}*</label>
-                <input type="email" id="email" name="email" class="form-control" value="{{ old('email', isset($user) ? $user->email : '') }}" required>
-                @if($errors->has('email'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('email') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.email_helper') }}
-                </p>
+
+            <!-- Email Field -->
+            <div class="form-group row">
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.email') }}*</label>
+                <div class="col-md-6">
+                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                           value="{{ old('email', isset($user) ? $user->email : '') }}" required>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
-                @if($errors->has('password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.password_helper') }}
-                </p>
+
+            <!-- Phone Number Field -->
+            <div class="form-group row">
+                <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.phone_number') }}*</label>
+                <div class="col-md-6">
+                    <input type="text" id="phone_number" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
+                           value="{{ old('phone_number', isset($user) ? $user->phone_number : '') }}" required>
+                    @error('phone_number')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
-                <label for="roles">{{ trans('cruds.user.fields.roles') }}*
-                    <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
-                <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
-                    @foreach($roles as $id => $roles)
-                        <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('roles'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('roles') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.roles_helper') }}
-                </p>
+
+            <!-- Date of Birth Field -->
+            <div class="form-group row">
+                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.date_of_birth') }}*</label>
+                <div class="col-md-6">
+                    <input type="date" id="date_of_birth" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror"
+                           value="{{ old('date_of_birth', isset($user) ? $user->date_of_birth : '') }}" required>
+                    @error('date_of_birth')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div class="form-group {{ $errors->has('institution_id') ? 'has-error' : '' }}" id="institutionGroup" style="{{ (in_array(2, old('roles', [])) || isset($user) && $user->roles->contains(2)) ? '' : 'display:none'}}">
-                <label for="institution">{{ trans('cruds.user.fields.institution') }}</label>
-                <select name="institution_id" id="institution" class="form-control select2">
-                    @foreach($institutions as $id => $institution)
-                        <option value="{{ $id }}" {{ (isset($user) && $user->institution ? $user->institution->id : old('institution_id')) == $id ? 'selected' : '' }}>{{ $institution }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('institution_id'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('institution_id') }}
-                    </em>
-                @endif
+
+            <!-- Password Field -->
+            <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.password') }}</label>
+                <div class="col-md-6">
+                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+
+            <!-- Roles Field -->
+            <div class="form-group row">
+                <label for="roles" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.roles') }}*</label>
+                <div class="col-md-6">
+                    <select name="roles[]" id="roles" class="form-control select2 @error('roles') is-invalid @enderror" multiple="multiple" required>
+                        @foreach($roles as $id => $roles)
+                            <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                        @endforeach
+                    </select>
+                    @error('roles')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Institution Field -->
+            <div class="form-group row" id="institutionGroup" style="{{ (in_array(2, old('roles', [])) || isset($user) && $user->roles->contains(2)) ? '' : 'display:none'}}">
+                <label for="institution" class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.institution') }}</label>
+                <div class="col-md-6">
+                    <select name="institution_id" id="institution" class="form-control select2 @error('institution_id') is-invalid @enderror">
+                        @foreach($institutions as $id => $institution)
+                            <option value="{{ $id }}" {{ (isset($user) && $user->institution ? $user->institution->id : old('institution_id')) == $id ? 'selected' : '' }}>{{ $institution }}</option>
+                        @endforeach
+                    </select>
+                    @error('institution_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-danger">
+                        {{ trans('global.save') }}
+                    </button>
+                </div>
             </div>
         </form>
-
-
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
 <script>
-$(document).ready(function() {
-    $('#roles').change(function() {
-        if($("#roles option:selected:contains('Institution')").val())
-            $("#institutionGroup:hidden").show(150);
-        else
-            $("#institutionGroup:visible").hide(150);
+    $(document).ready(function() {
+        $('#roles').change(function() {
+            if($("#roles option:selected:contains('Institution')").val())
+                $("#institutionGroup:hidden").show(150);
+            else
+                $("#institutionGroup:visible").hide(150);
+        });
     });
-});
 </script>
 @endsection
