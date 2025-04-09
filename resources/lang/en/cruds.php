@@ -145,7 +145,7 @@ return [
             'target_audience'    => 'Target Audience',
             'course_duration'    => 'Course Duration',
             'learning_outcomes'  => 'Learning Outcomes',
-            'instructor_id'      => 'Instructor',
+            'instructor'         => 'Instructor',
         ],
     ],
     'enrollment'     => [

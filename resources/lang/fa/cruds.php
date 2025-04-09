@@ -143,7 +143,7 @@ return [
             'target_audience'    => 'مخاطب هدف',
             'course_duration'    => 'مدت دوره',
             'learning_outcomes'  => 'نتایج یادگیری',
-            'instructor_id'      => 'مدرس',
+            'instructor'         => 'مدرس',
         ],
     ],
     'enrollment'     => [

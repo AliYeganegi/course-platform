@@ -110,7 +110,7 @@
                                         <p>-----------------------------------------</p>
                                     @endif
                                 </div>
-                        </div <!-- Target Audience -->
+                        </div>
                         <div class="content_wrapper mt-4">
                             <h5 class="mb-2 text-center">{{ __('cruds.course.fields.target_audience') }}</h4>
                                 <div class="content">
@@ -131,6 +131,14 @@
                             <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_duration') }}</h4>
                                 <div class="content">
                                     {{ $course->course_duration ?? '------------------------------' }}
+                                </div>
+                        </div>
+
+                        {{-- Course Instructor --}}
+                        <div class="content_wrapper mt-4">
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.instructor') }}</h4>
+                                <div class="content">
+                                    {{ $course->instructor->name ?? '------------------------------' }}
                                 </div>
                         </div>
 
