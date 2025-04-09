@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.main')
+
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center padding_top special_cource mb-5">
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
