@@ -27,6 +27,10 @@ Route::get('enroll/{course}', 'EnrollmentController@create')->name('enroll.creat
 Route::post('enroll/{course}', 'EnrollmentController@store')->name('enroll.store');
 Route::get('my-courses', 'EnrollmentController@myCourses')->name('enroll.myCourses')->middleware('auth');
 Route::resource('courses', 'CourseController')->only(['index', 'show']);
+Route::post('courses/{course}/comment', 'CourseController@addComment')->name('courses.comment');
+Route::post('comments/{comment}/reply', 'CourseController@replyToComment')->name('comments.reply');
+Route::post('comments/{comment}/like', 'CourseController@likeComment')->name('comments.like');
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');

@@ -93,6 +93,12 @@ class Course extends Model implements HasMedia
         return $this->belongsToMany(Discipline::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
     public function getPrice()
     {
         return $this->price ? '$' . number_format($this->price, 2) : 'FREE';
