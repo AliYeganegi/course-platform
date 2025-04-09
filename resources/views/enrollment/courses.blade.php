@@ -17,15 +17,15 @@
                             <img src="{{ optional($enrollment->course->photo)->getUrl() ?? asset('img/no_image.png') }}"
                                 class="special_img" alt="">
                             <div class="special_cource_text">
-                                @foreach ($enrollment->course->disciplines as $discipline)
-                                    <a href="{{ route('courses.index') }}?discipline={{ $discipline->id }}"
-                                        class="btn_4 mr-1 mb-1">{{ $discipline->name }}</a>
-                                @endforeach
                                 <h4>{{ $enrollment->course->getPrice() }}</h4>
                                 <a href="{{ route('courses.show', $enrollment->course->id) }}">
                                     <h3>{{ $enrollment->course->name }}</h3>
                                 </a>
                                 <p>{{ Str::limit($enrollment->course->description, 100) }}</p>
+                                @foreach ($enrollment->course->disciplines as $discipline)
+                                    <a href="{{ route('courses.index') }}?discipline={{ $discipline->id }}"
+                                        class="btn_3 mr-1 mb-1">{{ $discipline->name }}</a>
+                                @endforeach
                                 @if ($enrollment->course->institution)
                                     <div class="author_info">
                                         <div class="author_img">

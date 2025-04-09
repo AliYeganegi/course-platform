@@ -96,7 +96,7 @@
                         <div class="content_wrapper mt-4">
                             <h5 class="mb-2">{{ __('main.description') }}</h4>
                                 <div class="content">
-                                    {{ $course->description ?? 'No description provided' }}
+                                    {{ $course->description ?? '-----------------------------------------' }}
                                 </div>
                         </div>
 
@@ -107,7 +107,7 @@
                                     @if ($course->learning_outcomes)
                                         <p>{{ $course->learning_outcomes }}</p>
                                     @else
-                                        <p>{{ __('cruds.course.no_learning_outcomes') }}</p>
+                                        <p>-----------------------------------------</p>
                                     @endif
                                 </div>
                         </div <!-- Target Audience -->
@@ -121,7 +121,7 @@
                                             @endif
                                         @endforeach
                                     @else
-                                        <p>{{ __('cruds.course.no_target_audience') }}</p>
+                                        <p>-----------------------------------------</p>
                                     @endif
                                 </div>
                         </div>
@@ -130,7 +130,7 @@
                         <div class="content_wrapper mt-4">
                             <h5 class="mb-2">{{ __('cruds.course.fields.course_duration') }}</h4>
                                 <div class="content">
-                                    {{ $course->course_duration ?? 'No course duration provided' }}
+                                    {{ $course->course_duration ?? '------------------------------' }}
                                 </div>
                         </div>
 
@@ -143,7 +143,7 @@
                                             <p>{{ $topic }}</p>
                                         @endforeach
                                     @else
-                                        <p>{{ __('cruds.course.no_course_topics') }}</p>
+                                        <p>-----------------------------------------</p>
                                     @endif
                                 </div>
                         </div>
@@ -157,7 +157,7 @@
                                             <p>{{ $prerequisite }}</p>
                                         @endforeach
                                     @else
-                                        <p>{{ __('cruds.course.no_prerequisites') }}</p>
+                                        <p>-----------------------------------------</p>
                                     @endif
                                 </div>
                         </div>
