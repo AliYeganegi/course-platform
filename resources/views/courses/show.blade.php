@@ -181,6 +181,7 @@
                                 </div>
                                 <p class="mt-2">{{ $comment->content }}</p>
 
+                                @auth
                                 <!-- Like Button with icon -->
                                 <form method="POST" action="{{ route('comments.like', $comment->id) }}" class="d-inline-block">
                                     @csrf
@@ -188,6 +189,7 @@
                                         <i class="fas fa-thumbs-up"></i> Like ({{ $comment->likes->count() }})
                                     </button>
                                 </form>
+
 
                                 <!-- Reply Form -->
                                 <form method="POST" action="{{ route('comments.reply', $comment->id) }}" class="mt-2">
@@ -197,6 +199,7 @@
                                         <button type="submit" class="btn btn-primary btn-sm">{{ trans('global.reply') }}</button>
                                     </div>
                                 </form>
+                                @endauth
 
                                 <!-- Show Replies -->
                                 @foreach ($comment->replies as $reply)
