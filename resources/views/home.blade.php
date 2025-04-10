@@ -107,9 +107,9 @@
             </div>
             <div class="row">
                 @foreach ($randomInstitutions as $institution)
-                    <div class="col-sm-6 col-lg-4 col-xl-4">
-                        <div class="single-home-blog">
-                            <div class="card">
+                <div class="col-sm-6 col-lg-4 col-xl-4 d-flex">
+                    <div class="single-home-blog flex-fill d-flex flex-column">
+                        <div class="card h-100 d-flex flex-column">
                                 <img src="{{ optional($institution->logo)->url ?? asset('img/no_image.png') }}"
                                     class="card-img-top" alt="{{ $institution->name }}">
                                 <div class="card-body">
