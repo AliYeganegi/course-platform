@@ -9,6 +9,7 @@ use App\Mail\OtpEmail;
 use Illuminate\Support\Facades\Redis;
 use Alive2212\LaravelSmartResponse\SmartResponse;
 use App\Course;
+use App\Enrollment;
 use App\Jobs\SendEmailJob;
 
 class CourseRegisterService
@@ -20,12 +21,17 @@ class CourseRegisterService
         $this->emailService = $emailService;
     }
 
-    public function sendInvitationLink($email, Course $course)
+    public function sendInvitationLinkToUser($email, Course $course)
     {
         $course_link = $course->course_link;
 
 
         // Send Register email
         $this->emailService->sendCourseRegisterEmail($email, $course_link);
+    }
+
+    public function sendEnrollmentRequestToAdmin(Enrollment $enrollment)
+    {
+        $this->emailService->sendEnrollmentRequestEmail($enrollment);
     }
 }

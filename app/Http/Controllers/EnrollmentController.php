@@ -9,12 +9,20 @@ use App\Course;
 use App\Mail\CourseRegister;
 use App\Services\CourseRegisterService;
 use App\Services\EmailService;
+use App\Services\EnrollmentService;
+use App\Services\UserRegistrationService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class EnrollmentController extends Controller
 {
+
+    public function __construct(
+        private CourseRegisterService $courseRegisterService,
+        private UserRegistrationService $userRegistrationService,
+        private EnrollmentService $enrollmentService
+    ) {}
     public function create(Course $course)
     {
         $breadcrumb = "Enroll in $course->name course";
@@ -24,39 +32,23 @@ class EnrollmentController extends Controller
 
     public function store(Request $request, Course $course)
     {
-        $courseRegisterService = new CourseRegisterService(new EmailService);
-
         if (auth()->guest()) {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:8|confirmed',
-            ]);
-
-            $user = User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
-            ]);
-
-            auth()->login($user);
+            $user = $this->userRegistrationService->registerAndLogin($request);
+        } else {
+            $user = auth()->user();
         }
 
-        $existingEnrollment = $course->enrollments()->where('user_id', auth()->user()->id)->first();
-
-        if ($existingEnrollment) {
+        if ($this->enrollmentService->isUserEnrolled($user, $course)) {
             return redirect()->route('enroll.myCourses')->with('message', 'You are already enrolled in this course!');
         }
 
-        $newEnrollment = $course->enrollments()->create(['user_id' => auth()->user()->id]);
+        $enrollment = $this->enrollmentService->enrollUser($user, $course);
 
-        if ($course->price == null || $course->price == 0) {
-            $newEnrollment->status = 'accepted';
-            $newEnrollment->save();
+        if ($enrollment->status === 'accepted' && $course->course_link) {
+            $this->courseRegisterService->sendInvitationLinkToUser($user->email, $course);
         }
-
-        if ($newEnrollment->status == 'accepted' && $newEnrollment->course->course_link != null) {
-            $courseRegisterService->sendInvitationLink($newEnrollment->user->email, $newEnrollment->course);
+        else if ($enrollment->status != 'accepted') {
+            $this->courseRegisterService->sendEnrollmentRequestToAdmin($enrollment);
         }
 
         return redirect()->route('enroll.myCourses');
