@@ -44,12 +44,7 @@ class EnrollmentController extends Controller
 
         $enrollment = $this->enrollmentService->enrollUser($user, $course);
 
-        if ($enrollment->status === 'accepted' && $course->course_link) {
-            $this->courseRegisterService->sendInvitationLinkToUser($user->email, $course);
-        }
-        else if ($enrollment->status != 'accepted') {
-            $this->courseRegisterService->sendEnrollmentRequestToAdmin($enrollment);
-        }
+        $this->courseRegisterService->handleEnrollmentNotification($enrollment);
 
         return redirect()->route('enroll.myCourses');
     }

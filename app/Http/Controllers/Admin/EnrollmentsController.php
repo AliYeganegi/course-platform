@@ -63,7 +63,7 @@ class EnrollmentsController extends Controller
 
         if ($enrollment->status == 'accepted' && $enrollment->course->course_link != null) {
             $courseRegisterService = new CourseRegisterService(new EmailService);
-            $courseRegisterService->sendInvitationLink($enrollment->user->email, $enrollment->course);
+            $courseRegisterService->sendInvitationLinkToUser($enrollment->user->email, $enrollment->course);
         }
 
         return redirect()->route('admin.enrollments.index');

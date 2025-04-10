@@ -34,4 +34,13 @@ class CourseRegisterService
     {
         $this->emailService->sendEnrollmentRequestEmail($enrollment);
     }
+
+    public function handleEnrollmentNotification(Enrollment $enrollment): void
+    {
+        if ($enrollment->status === 'accepted' && $enrollment->course->course_link) {
+            $this->sendInvitationLinkToUser($enrollment->user->email, $enrollment->course);
+        } else {
+            $this->sendEnrollmentRequestToAdmin($enrollment);
+        }
+    }
 }
