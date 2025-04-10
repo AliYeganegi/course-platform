@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\FlareClient\View;
 
 use App\Course;
+use App\Mail\CourseRegister;
+use App\Services\CourseRegisterService;
+use App\Services\EmailService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +24,8 @@ class EnrollmentController extends Controller
 
     public function store(Request $request, Course $course)
     {
+        $courseRegisterService = new CourseRegisterService(new EmailService);
+
         if (auth()->guest()) {
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -43,7 +48,16 @@ class EnrollmentController extends Controller
             return redirect()->route('enroll.myCourses')->with('message', 'You are already enrolled in this course!');
         }
 
-        $course->enrollments()->create(['user_id' => auth()->user()->id]);
+        $newEnrollment = $course->enrollments()->create(['user_id' => auth()->user()->id]);
+
+        if ($course->price == null || $course->price == 0) {
+            $newEnrollment->status = 'accepted';
+            $newEnrollment->save();
+        }
+
+        if ($newEnrollment->status == 'accepted' && $newEnrollment->course->course_link != null) {
+            $courseRegisterService->sendInvitationLink($newEnrollment->user->email, $newEnrollment->course);
+        }
 
         return redirect()->route('enroll.myCourses');
     }
