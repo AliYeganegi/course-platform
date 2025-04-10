@@ -5,7 +5,7 @@ return [
     'courses' => 'Courses',
     'institution' => 'Institution',
     'institutions' => 'Institutions',
-    'random_institutions' => 'Random Institutions',
+    'random_institutions' => 'Some of our Institutions',
     'home' => 'Home',
     'my_courses' => 'My Courses',
     'disciplines' => 'Disciplines',

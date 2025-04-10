@@ -58,10 +58,10 @@
             </div>
             <div class="row">
                 @foreach ($newestCourses as $course)
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="single_special_cource">
+                <div class="col-sm-6 col-lg-4 d-flex">
+                    <div class="single_special_cource flex-fill d-flex flex-column">
                             <img src="{{ $course->photo ? $course->photo->getUrl() : asset('img/no_image.png') }}"
-                                class="special_img" alt="">
+                                class="special_img fixed-course-img" alt="">
                             <div class="special_cource_text">
                                 <h4>{{ $course->getPrice() }}</h4>
                                 <a href="{{ route('courses.show', $course->id) }}">

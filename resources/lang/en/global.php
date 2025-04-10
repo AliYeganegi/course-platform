@@ -251,7 +251,7 @@ return [
     'no_alerts'                            => 'No alerts',
     'calendar'                             => 'Calendar',
     'messenger'                            => 'Messenger',
-    'comment'                              => 'Comments',
+    'comment'                              => 'Comments and Questions',
     'post_comment'                         => 'Post Comment',
     'reply'                                => 'Reply',
 ];

@@ -113,7 +113,7 @@ return [
     'coupon_management'                    => 'مدیریت کوپن‌ها',
     'coupons'                              => 'کوپن‌ها',
     'coupons_amount'                       => 'مقدار کوپن‌ها',
-    'comment'                              => 'نظرات',
+    'comment'                              => 'دیدگاه ها و پرسش ها',
     'post_comment'                         => 'ثبت نظر',
     'reply'                                => 'پاسخ',
 ];

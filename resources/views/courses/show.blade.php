@@ -87,6 +87,61 @@
                             </a>
                         </div>
                     @endif
+
+                    <div class="card shadow-sm rounded p-3 mb-4 mt-4">
+                        <h5 class="mt-4 mb-3 text-center">{{ trans('global.comment') }}</h5>
+
+                        @foreach ($course->comments()->whereNull('parent_id')->get() as $comment)
+                            <div class="card p-3 mb-3 shadow-sm rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <strong>{{ $comment->user->name }}</strong>
+                                    <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                </div>
+                                <p class="mt-2">{{ $comment->content }}</p>
+
+                                @auth
+                                <!-- Like Button with icon -->
+                                <form method="POST" action="{{ route('comments.like', $comment->id) }}" class="d-inline-block">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-success btn-sm">
+                                        <i class="fas fa-thumbs-up"></i> Like ({{ $comment->likes->count() }})
+                                    </button>
+                                </form>
+
+
+                                <!-- Reply Form -->
+                                <form method="POST" action="{{ route('comments.reply', $comment->id) }}" class="mt-2">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input type="text" name="content" class="form-control form-control-sm" placeholder="Reply..." required>
+                                        <button type="submit" class="btn btn-primary btn-sm">{{ trans('global.reply') }}</button>
+                                    </div>
+                                </form>
+                                @endauth
+
+                                <!-- Show Replies -->
+                                @foreach ($comment->replies as $reply)
+                                    <div class="ml-4 mt-2 p-2 bg-light rounded">
+                                        <strong>{{ $reply->user->name }}</strong>:
+                                        <p class="mb-0">{{ $reply->content }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+
+                        @auth
+                            <div class="card p-3 mt-4 shadow-sm rounded">
+                                <h6>{{ trans('global.post_comment') }}</h6>
+                                <form action="{{ route('courses.comment', $course->id) }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <textarea name="content" class="form-control" rows="4" placeholder="Add a comment..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-2">{{ trans('global.post_comment') }}</button>
+                                </form>
+                            </div>
+                        @endauth
+                    </div>
                 </div>
 
 
@@ -169,60 +224,6 @@
                                     @endif
                                 </div>
                         </div>
-                    </div>
-                    <div class="card shadow-sm rounded p-3 mb-4">
-                        <h5 class="mt-4 mb-3 text-center">{{ trans('global.comment') }}</h5>
-
-                        @foreach ($course->comments()->whereNull('parent_id')->get() as $comment)
-                            <div class="card p-3 mb-3 shadow-sm rounded">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <strong>{{ $comment->user->name }}</strong>
-                                    <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
-                                </div>
-                                <p class="mt-2">{{ $comment->content }}</p>
-
-                                @auth
-                                <!-- Like Button with icon -->
-                                <form method="POST" action="{{ route('comments.like', $comment->id) }}" class="d-inline-block">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-success btn-sm">
-                                        <i class="fas fa-thumbs-up"></i> Like ({{ $comment->likes->count() }})
-                                    </button>
-                                </form>
-
-
-                                <!-- Reply Form -->
-                                <form method="POST" action="{{ route('comments.reply', $comment->id) }}" class="mt-2">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="content" class="form-control form-control-sm" placeholder="Reply..." required>
-                                        <button type="submit" class="btn btn-primary btn-sm">{{ trans('global.reply') }}</button>
-                                    </div>
-                                </form>
-                                @endauth
-
-                                <!-- Show Replies -->
-                                @foreach ($comment->replies as $reply)
-                                    <div class="ml-4 mt-2 p-2 bg-light rounded">
-                                        <strong>{{ $reply->user->name }}</strong>:
-                                        <p class="mb-0">{{ $reply->content }}</p>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endforeach
-
-                        @auth
-                            <div class="card p-3 mt-4 shadow-sm rounded">
-                                <h6>{{ trans('global.post_comment') }}</h6>
-                                <form action="{{ route('courses.comment', $course->id) }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <textarea name="content" class="form-control" rows="4" placeholder="Add a comment..." required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mt-2">{{ trans('global.post_comment') }}</button>
-                                </form>
-                            </div>
-                        @endauth
                     </div>
 
                 </div>
