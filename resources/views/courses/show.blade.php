@@ -13,7 +13,7 @@
 
                     {{-- Enrollment Status --}}
                     <div class="card shadow-sm rounded p-3 mt-4">
-                        <h5 class="mb-2">{{ __('cruds.enrollment.fields.status') }}</h5>
+                        <h5 class="mb-2 text-center">{{ __('cruds.enrollment.fields.status') }}</h5>
                         @php
                             $status = optional($course->enrollment)->status;
                             $statusColor =
@@ -31,7 +31,7 @@
                     <!-- File Download Section -->
                     @if ($course->file_path)
                         <div class="content_wrapper mt-4">
-                            <h4 class="title_top">{{ __('main.download_material') }}</h4>
+                            <h4 class="title_top text-center">{{ __('main.download_material') }}</h4>
                             <div class="content">
                                 <a href="{{ asset('storage/' . $course->file_path) }}" class="btn btn-primary" download>
                                     {{ __('main.download_file') }}
@@ -53,14 +53,14 @@
                         {{-- Show course link and file --}}
                         <div class="card shadow-sm rounded p-3 mt-4">
                             @if ($course->course_link)
-                                <h5 class="mb-2">{{ __('cruds.course.fields.course_link') }}</h5>
+                                <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_link') }}</h5>
                                 <a href="{{ $course->course_link }}" target="_blank" class="btn btn-success w-100 mb-3">
                                     {{ __('cruds.course.fields.access_course') }}
                                 </a>
                             @endif
 
                             @if ($course->course_file)
-                                <h5 class="mb-2">{{ __('cruds.course.fields.course_file') }}</h5>
+                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_file') }}</h5>
                                 <a href="{{ asset('storage/' . $course->course_file) }}" download
                                     class="btn btn-primary w-100">
                                     {{ __('cruds.course.download_material') }}

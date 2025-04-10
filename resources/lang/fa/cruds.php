@@ -142,7 +142,7 @@ return [
             'course_topics'      => 'موضوعات دوره',
             'target_audience'    => 'مخاطب هدف',
             'course_duration'    => 'مدت دوره',
-            'learning_outcomes'  => 'نتایج یادگیری',
+            'learning_outcomes'  => 'آنچه خواهید آموخت',
             'instructor'         => 'مدرس',
         ],
     ],
