@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="card shadow-sm rounded p-3 mb-4">
-                        <h5 class="mt-4 mb-3">{{ trans('global.comment') }}</h5>
+                        <h5 class="mt-4 mb-3 text-center">{{ trans('global.comment') }}</h5>
 
                         @foreach ($course->comments()->whereNull('parent_id')->get() as $comment)
                             <div class="card p-3 mb-3 shadow-sm rounded">

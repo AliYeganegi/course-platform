@@ -17,4 +17,13 @@ return [
     'course_fee' => 'Course Fee',
     'enroll' => 'Enroll the course',
     'duplicate_enroll' => 'You already have enrolled this course',
+    'start_journey' => 'Start Your Robotics Journey Today!',
+    'start_building' => 'Start Building Robots',
+    'start_building_text' => 'Turn your ideas into real robots with our easy-to-follow courses!',
+    'hand_on_learning' => 'Hands-on Learning',
+    'hand_on_learning_text' => 'Get your hands dirty with interactive lessons and challenges.',
+    'fun_challenges' => 'Fun Challenges & Contests',
+    'fun_challenges_text' => 'Compete with other students in fun robot-building challenges!',
+    'support' => '24/7 Support',
+    'support_text' => 'Our team is here to help you whenever you need it, 24/7!',
 ];

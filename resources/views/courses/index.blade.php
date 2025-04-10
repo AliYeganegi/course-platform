@@ -3,6 +3,21 @@
 @section('content')
     <section class="special_cource padding_top">
         <div class="container">
+
+            @if ($institution)
+            <div class="row justify-content-center mb-5">
+                <div class="col-xl-10">
+                    <div class="card p-4 shadow-lg text-center">
+                        <h2 class="mb-3">{{ $institution->name }}</h2>
+                        <p class="mb-3 text-muted">{{ $institution->description }}</p>
+                        <img src="{{ optional($institution->logo)->getUrl() ?? asset('img/no_image.png') }}"
+                            alt="Institution Logo" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        @endif
+
+
             <div class="row justify-content-center">
                 <div class="col-xl-5">
                     <div class="section_tittle text-center">
@@ -10,6 +25,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 @foreach ($courses as $course)
                     <div class="col-sm-6 col-lg-4 mb-3">
@@ -45,6 +61,7 @@
                     </div>
                 @endforeach
             </div>
+
             <div class="row">
                 <div class="col-12 mb-4">
                     <div class="float-right">

@@ -4,18 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Course;
+use App\Institution;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::searchResults()
             ->paginate(6);
 
         $breadcrumb = "Courses";
 
-        return view('courses.index', compact(['courses', 'breadcrumb']));
+        $institution = Institution::find($request->institution);
+
+        $courses = Course::when($institution, function ($query) use ($institution) {
+            return $query->where('institution_id', $institution->id);
+        })->paginate(10);
+
+        return view('courses.index', compact(['courses', 'breadcrumb', 'institution']));
     }
 
     public function addComment(Request $request, Course $course)

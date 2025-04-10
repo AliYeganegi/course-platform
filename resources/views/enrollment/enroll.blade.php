@@ -19,11 +19,11 @@
                 </div>
             @endif
 
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-6">
-                    <h3 class="mb-30">{{ __('main.submit_enrollment') }}</h3>
+                    <h3 class="mb-30 text-center">{{ __('main.submit_enrollment') }}</h3>
                     @guest
-                        <p>{{ __('main.login_credentials') }}<a href="{{ route('enroll.handleLogin', $course->id) }}">here</a>.</p>
+                        <p>{{ __('main.login_credentials') }}<a href="{{ route('enroll.handleLogin', $course->id) }}"> here</a>.</p>
                     @endguest
                     <form method="POST" action="{{ route('enroll.store', $course->id) }}">
                         @csrf
