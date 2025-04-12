@@ -116,4 +116,5 @@ return [
     'comment'                              => 'دیدگاه ها و پرسش ها',
     'post_comment'                         => 'ثبت نظر',
     'reply'                                => 'پاسخ',
+    'show_more'                            => 'نمایش بیشتر',
 ];

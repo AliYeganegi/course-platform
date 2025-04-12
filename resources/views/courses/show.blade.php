@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 @extends('layouts.main')
 
 @section('content')
@@ -237,15 +239,15 @@
                                 <h4 class="mb-4 text-center font-weight-bold">{{ __('cruds.examination.title') }}</h4>
                                 <div class="content">
                                     @foreach ($course->examinations as $exam)
+                                        @php
+                                            $now = \Carbon\Carbon::now();
+                                            $start = \Carbon\Carbon::parse($exam->quiz_start_datetime);
+                                            $end = \Carbon\Carbon::parse($exam->quiz_end_datetime);
+                                            $isAccessible = $now->between($start, $end);
+                                        @endphp
+
                                         <div class="card p-4 mb-4 shadow-sm rounded text-center">
                                             <h5 class="mb-3">{{ __('cruds.examination.fields.quiz_link') }}</h5>
-
-                                            @php
-                                                $now = \Carbon\Carbon::now();
-                                                $start = \Carbon\Carbon::parse($exam->quiz_start_datetime);
-                                                $end = \Carbon\Carbon::parse($exam->quiz_end_datetime);
-                                                $isAccessible = $now->between($start, $end);
-                                            @endphp
 
                                             <a href="{{ $isAccessible ? $exam->quiz_link : '#' }}"
                                                 target="{{ $isAccessible ? '_blank' : '_self' }}"
@@ -254,47 +256,57 @@
                                                 {{ __('cruds.examination.access_quiz') }}
                                             </a>
 
-                                            <ul class="list-unstyled mx-auto" style="max-width: 600px;">
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.name') }}:</strong><br>
-                                                    {{ $exam->name }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.description') }}:</strong><br>
-                                                    {{ $exam->description }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong><br>
-                                                    <span
-                                                        class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
-                                                        {{ ucfirst($exam->quiz_status) }}
-                                                    </span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong><br>
-                                                    {{ $start->format('d M Y, H:i') }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong><br>
-                                                    {{ $end->format('d M Y, H:i') }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong><br>
-                                                    {{ $exam->quiz_number_of_attempts }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.number_of_questions') }}:</strong><br>
-                                                    {{ $exam->number_of_questions }}
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.exam_duration') }}:</strong><br>
-                                                    {{ $exam->exam_duration }} mins
-                                                </li>
-                                                <li class="mb-3">
-                                                    <strong>{{ __('cruds.examination.fields.total_point') }}:</strong><br>
-                                                    {{ $exam->total_point }}
-                                                </li>
-                                            </ul>
+                                            <!-- Always visible summary fields -->
+                                            <p class="mb-1"><strong>{{ __('cruds.examination.fields.name') }}:</strong>
+                                                {{ $exam->name }}</p>
+                                            <p class="mb-3">
+                                                <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong>
+                                                <span
+                                                    class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
+                                                    {{ ucfirst($exam->quiz_status) }}
+                                                </span>
+                                            </p>
+
+                                            <!-- Button to toggle extra details -->
+                                            <button class="btn btn-sm btn-info" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#details{{ $exam->id }}" aria-expanded="false"
+                                                aria-controls="details{{ $exam->id }}">
+                                                {{ __('global.show_more') }}
+                                            </button>
+
+                                            <!-- Hidden details -->
+                                            <div class="collapse mt-3" id="details{{ $exam->id }}">
+                                                <ul class="list-unstyled">
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.description') }}:</strong>
+                                                        {{ $exam->description }}
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong>
+                                                        {{ $start->format('d M Y, H:i') }}
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong>
+                                                        {{ $end->format('d M Y, H:i') }}
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong>
+                                                        {{ $exam->quiz_number_of_attempts }}
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.number_of_questions') }}:</strong>
+                                                        {{ $exam->number_of_questions }}
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.exam_duration') }}:</strong>
+                                                        {{ $exam->exam_duration }} mins
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <strong>{{ __('cruds.examination.fields.total_point') }}:</strong>
+                                                        {{ $exam->total_point }}
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>

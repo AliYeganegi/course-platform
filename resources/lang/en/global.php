@@ -254,4 +254,5 @@ return [
     'comment'                              => 'Comments and Questions',
     'post_comment'                         => 'Post Comment',
     'reply'                                => 'Reply',
+    'show_more'                            => 'Show More',
 ];
