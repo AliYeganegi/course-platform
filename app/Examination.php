@@ -17,6 +17,11 @@ class Examination extends Model
         'quiz_end_datetime',
         'quiz_number_of_attempts',
         'course_id',
+        'name',
+        'number_of_questions',
+        'total_point',
+        'description',
+        'exam_duration',
     ];
 
     public function course()

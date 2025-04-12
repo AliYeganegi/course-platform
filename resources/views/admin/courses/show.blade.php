@@ -136,6 +136,11 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>{{ trans('cruds.examination.fields.name') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.description') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.number_of_questions') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.exam_duration') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.total_point') }}</th>
                                     <th>{{ trans('cruds.examination.fields.quiz_link') }}</th>
                                     <th>{{ trans('cruds.examination.fields.quiz_status') }}</th>
                                     <th>{{ trans('cruds.examination.fields.quiz_start_datetime') }}</th>
@@ -146,6 +151,11 @@
                             <tbody>
                                 @foreach ($course->examinations as $exam)
                                     <tr>
+                                        <td>{{ $exam->name }}</td>
+                                        <td>{{ $exam->description }}</td>
+                                        <td>{{ $exam->number_of_questions }}</td>
+                                        <td>{{ $exam->exam_duration }} mins</td>
+                                        <td>{{ $exam->total_point }}</td>
                                         <td><a href="{{ $exam->quiz_link }}" target="_blank">{{ $exam->quiz_link }}</a>
                                         </td>
                                         <td>{{ ucfirst($exam->quiz_status) }}</td>

@@ -232,13 +232,13 @@
 
                     {{-- Quiz/Examination Section --}}
                     @if ($course->examinations->count())
-                        <div class="card shadow-sm rounded p-3 mb-4">
+                        <div class="card shadow-sm rounded p-4 mb-4">
                             <div class="content_wrapper mt-4">
-                                <h5 class="mb-2 text-center">{{ __('cruds.examination.title') }}</h5>
+                                <h4 class="mb-4 text-center font-weight-bold">{{ __('cruds.examination.title') }}</h4>
                                 <div class="content">
                                     @foreach ($course->examinations as $exam)
-                                        <div class="card p-3 mb-3 shadow-sm rounded">
-                                            <h6 class="text-center">{{ __('cruds.examination.fields.quiz_link') }}</h6>
+                                        <div class="card p-4 mb-4 shadow-sm rounded text-center">
+                                            <h5 class="mb-3">{{ __('cruds.examination.fields.quiz_link') }}</h5>
 
                                             @php
                                                 $now = \Carbon\Carbon::now();
@@ -249,39 +249,59 @@
 
                                             <a href="{{ $isAccessible ? $exam->quiz_link : '#' }}"
                                                 target="{{ $isAccessible ? '_blank' : '_self' }}"
-                                                class="btn btn-outline-primary mb-2 {{ $isAccessible ? '' : 'disabled' }}"
+                                                class="btn btn-outline-primary mb-3 {{ $isAccessible ? '' : 'disabled' }}"
                                                 {{ $isAccessible ? '' : 'aria-disabled=true' }}>
                                                 {{ __('cruds.examination.access_quiz') }}
                                             </a>
 
-                                            <ul class="list-unstyled small">
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong>
+                                            <ul class="list-unstyled mx-auto" style="max-width: 600px;">
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.name') }}:</strong><br>
+                                                    {{ $exam->name }}
+                                                </li>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.description') }}:</strong><br>
+                                                    {{ $exam->description }}
+                                                </li>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong><br>
                                                     <span
                                                         class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
                                                         {{ ucfirst($exam->quiz_status) }}
                                                     </span>
                                                 </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong><br>
                                                     {{ $start->format('d M Y, H:i') }}
                                                 </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong><br>
                                                     {{ $end->format('d M Y, H:i') }}
                                                 </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong><br>
                                                     {{ $exam->quiz_number_of_attempts }}
+                                                </li>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.number_of_questions') }}:</strong><br>
+                                                    {{ $exam->number_of_questions }}
+                                                </li>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.exam_duration') }}:</strong><br>
+                                                    {{ $exam->exam_duration }} mins
+                                                </li>
+                                                <li class="mb-3">
+                                                    <strong>{{ __('cruds.examination.fields.total_point') }}:</strong><br>
+                                                    {{ $exam->total_point }}
                                                 </li>
                                             </ul>
                                         </div>
                                     @endforeach
-
                                 </div>
                             </div>
                         </div>
                     @endif
+
                 </div>
             </div>
     </section>

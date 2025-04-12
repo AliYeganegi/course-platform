@@ -181,6 +181,11 @@ return [
             'quiz_start_datetime'   => 'زمان شروع آزمون',
             'quiz_end_datetime'     => 'زمان پایان آزمون',
             'quiz_number_of_attempts' => 'تعداد دفعات مجاز',
+            'name'                  => 'نام آزمون',
+            'exam_duration'         => 'زمان آزمون',
+            'description'           => 'توضیحات',
+            'number_of_questions'   => 'تعداد سوالات',
+            'total_point'           => 'مجموع نمره',
         ]
     ],
 ];

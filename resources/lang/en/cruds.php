@@ -183,7 +183,11 @@ return [
             'quiz_start_datetime'   => 'Quiz Start Time',
             'quiz_end_datetime'     => 'Quiz End Time',
             'quiz_number_of_attempts' => 'Number Of Attempts',
-
+            'name'                  => 'Quiz Name',
+            'exam_duration'         => 'Quiz Duration',
+            'description'           => 'Description',
+            'number_of_questions'   => 'Number Of Questions',
+            'total_point'           => 'Total Point',
         ]
     ],
 ];
