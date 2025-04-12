@@ -169,4 +169,19 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
+    'examination'    => [
+        'title'                     => 'Quiz',
+        'add_new'                   => 'Add New Quiz',
+        'add_quiz'                  => 'Add Quiz',
+        'quiz_deleted'              => 'Quiz Deleted',
+        'quiz_added'                => 'Quiz Added To Course',
+        'fields'                    => [
+            'quiz_link'             => 'Quiz Link',
+            'quiz_status'           => 'Quiz Status',
+            'quiz_start_datetime'   => 'Quiz Start Time',
+            'quiz_end_datetime'     => 'Quiz End Time',
+            'quiz_number_of_attempts' => 'Number Of Attempts',
+
+        ]
+    ],
 ];

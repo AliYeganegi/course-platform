@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ExaminationController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fa'])) {
@@ -56,6 +57,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('institutions/destroy', 'InstitutionsController@massDestroy')->name('institutions.massDestroy');
     Route::post('institutions/media', 'InstitutionsController@storeMedia')->name('institutions.storeMedia');
     Route::resource('institutions', 'InstitutionsController');
+
+    Route::post('examinations', [ExaminationController::class, 'store'])->name('examinations.store');
+    Route::resource('examinations', 'ExaminationController');
 
     // Courses
     Route::delete('courses/destroy', 'CoursesController@massDestroy')->name('courses.massDestroy');

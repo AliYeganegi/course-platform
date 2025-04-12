@@ -37,9 +37,12 @@ class CourseRegisterService
 
     public function handleEnrollmentNotification(Enrollment $enrollment): void
     {
+        // ToDo
         if ($enrollment->status === 'accepted' && $enrollment->course->course_link) {
             $this->sendInvitationLinkToUser($enrollment->user->email, $enrollment->course);
-        } else {
+        }
+        else if ($enrollment->status != 'accepted')
+        {
             $this->sendEnrollmentRequestToAdmin($enrollment);
         }
     }

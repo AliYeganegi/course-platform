@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use App\Discipline;
+use App\Examination;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyCourseRequest;
@@ -70,7 +71,7 @@ class CoursesController extends Controller
 
         $disciplines = Discipline::all()->pluck('name', 'id');
 
-        $course->load('institution', 'disciplines');
+        $course->load('institution', 'disciplines', 'examinations');
 
         $users = User::whereHas('roles', function ($query) {
             $query->whereIn('title', ['admin', 'Institution']);
@@ -98,6 +99,28 @@ class CoursesController extends Controller
 
         // Handle photo update
         $this->handlePhoto($request, $course);
+
+        // Handle deletion of examinations
+        if ($request->has('delete_examinations')) {
+            foreach ($request->delete_examinations as $examinationId) {
+                $examination = Examination::find($examinationId);
+                if ($examination && $examination->course_id == $course->id) {
+                    $examination->delete();
+                }
+            }
+        }
+
+        // Handle addition of new examination
+        if ($request->filled('new_quiz_link')) {
+            $newExamination = new Examination();
+            $newExamination->course_id = $course->id;
+            $newExamination->quiz_link = $request->new_quiz_link;
+            $newExamination->quiz_status = $request->new_quiz_status ?? 'inactive';
+            $newExamination->quiz_start_datetime = $request->new_quiz_start_datetime;
+            $newExamination->quiz_end_datetime = $request->new_quiz_end_datetime;
+            $newExamination->quiz_number_of_attempts = $request->new_quiz_number_of_attempts ?? 1;
+            $newExamination->save();
+        }
 
         return redirect()->route('admin.courses.index');
     }

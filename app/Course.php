@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Examination;
 use App\Scopes\CourseScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -98,6 +99,10 @@ class Course extends Model implements HasMedia
         return $this->hasMany(Comment::class);
     }
 
+    public function examinations()
+    {
+        return $this->hasMany(Examination::class);
+    }
 
     public function getPrice()
     {

@@ -216,7 +216,8 @@
                     <!-- File input for uploading new course file -->
                     <input type="file" name="course_file" class="form-control" id="course_file_input">
 
-                    <button type="button" id="clear-course-file" class="btn btn-sm btn-warning mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
+                    <button type="button" id="clear-course-file"
+                        class="btn btn-sm btn-warning mt-2">{{ trans('cruds.course.chosen_file_remove') }}</button>
 
                     @if ($errors->has('course_file'))
                         <em class="invalid-feedback">
@@ -231,6 +232,143 @@
                 </div>
 
             </form>
+
+            <!-- Examination Section -->
+            <div class="card mt-5">
+                <div class="card-header">
+                    {{ trans('cruds.examination.title') }}
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="card-body">
+                            <!-- List existing examinations -->
+                            @if (isset($course) && $course->examinations && $course->examinations->count() > 0)
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ trans('cruds.examination.fields.quiz_link') }}</th>
+                                                <th>{{ trans('cruds.examination.fields.quiz_status') }}</th>
+                                                <th>{{ trans('cruds.examination.fields.quiz_start_datetime') }}</th>
+                                                <th>{{ trans('cruds.examination.fields.quiz_end_datetime') }}</th>
+                                                <th>{{ trans('cruds.examination.fields.quiz_number_of_attempts') }}</th>
+                                                <th>{{ trans('global.actions') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($course->examinations as $exam)
+                                                <tr>
+                                                    <td><a href="{{ $exam->quiz_link }}"
+                                                            target="_blank">{{ $exam->quiz_link }}</a></td>
+                                                    <td>{{ ucfirst($exam->quiz_status) }}</td>
+                                                    <td>{{ $exam->quiz_start_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_start_datetime)) : '' }}
+                                                    </td>
+                                                    <td>{{ $exam->quiz_end_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_end_datetime)) : '' }}
+                                                    </td>
+                                                    <td>{{ $exam->quiz_number_of_attempts }}</td>
+                                                    <td>
+                                                        <form
+                                                            action="{{ route('admin.examinations.destroy', $exam->id) }}"
+                                                            method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                                onclick="return confirm('{{ trans('global.areYouSure') }}')">
+                                                                {{ trans('global.delete') }}
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <p class="text-muted">{{ trans('cruds.examination.no_examinations') }}</p>
+                            @endif
+
+                            <!-- Add new examination -->
+                            <h5 class="mt-3">{{ trans('cruds.examination.add_new') }}</h5>
+
+                            <form action="{{ route('admin.examinations.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+
+                                <div class="form-group {{ $errors->has('quiz_link') ? 'has-error' : '' }}">
+                                    <label for="quiz_link">{{ trans('cruds.examination.fields.quiz_link') }}</label>
+                                    <input type="url" id="quiz_link" name="quiz_link" class="form-control"
+                                        value="{{ old('quiz_link', '') }}">
+                                    @if ($errors->has('quiz_link'))
+                                        <em class="invalid-feedback">
+                                            {{ $errors->first('quiz_link') }}
+                                        </em>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('quiz_status') ? 'has-error' : '' }}">
+                                    <label for="quiz_status">{{ trans('cruds.examination.fields.quiz_status') }}</label>
+                                    <select name="quiz_status" id="quiz_status" class="form-control">
+                                        <option value="active" {{ old('quiz_status') == 'active' ? 'selected' : '' }}>
+                                            Active
+                                        </option>
+                                        <option value="inactive"
+                                            {{ old('quiz_status', 'inactive') == 'inactive' ? 'selected' : '' }}>Inactive
+                                        </option>
+                                    </select>
+                                    @if ($errors->has('quiz_status'))
+                                        <em class="invalid-feedback">
+                                            {{ $errors->first('quiz_status') }}
+                                        </em>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('quiz_start_datetime') ? 'has-error' : '' }}">
+                                    <label
+                                        for="quiz_start_datetime">{{ trans('cruds.examination.fields.quiz_start_datetime') }}</label>
+                                    <input type="datetime-local" id="quiz_start_datetime" name="quiz_start_datetime"
+                                        class="form-control" value="{{ old('quiz_start_datetime', '') }}">
+                                    @if ($errors->has('quiz_start_datetime'))
+                                        <em class="invalid-feedback">
+                                            {{ $errors->first('quiz_start_datetime') }}
+                                        </em>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('quiz_end_datetime') ? 'has-error' : '' }}">
+                                    <label
+                                        for="quiz_end_datetime">{{ trans('cruds.examination.fields.quiz_end_datetime') }}</label>
+                                    <input type="datetime-local" id="quiz_end_datetime" name="quiz_end_datetime"
+                                        class="form-control" value="{{ old('quiz_end_datetime', '') }}">
+                                    @if ($errors->has('quiz_end_datetime'))
+                                        <em class="invalid-feedback">
+                                            {{ $errors->first('quiz_end_datetime') }}
+                                        </em>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('quiz_number_of_attempts') ? 'has-error' : '' }}">
+                                    <label
+                                        for="quiz_number_of_attempts">{{ trans('cruds.examination.fields.quiz_number_of_attempts') }}</label>
+                                    <input type="number" id="quiz_number_of_attempts" name="quiz_number_of_attempts"
+                                        class="form-control" value="{{ old('quiz_number_of_attempts', 1) }}"
+                                        min="1">
+                                    @if ($errors->has('quiz_number_of_attempts'))
+                                        <em class="invalid-feedback">
+                                            {{ $errors->first('quiz_number_of_attempts') }}
+                                        </em>
+                                    @endif
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-success">
+                                        {{ trans('cruds.examination.add_quiz') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -304,5 +442,4 @@
             fileInput.value = ''; // Reset the file input
         });
     </script>
-
-@stop
+@endsection

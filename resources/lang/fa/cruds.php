@@ -167,4 +167,18 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
+    'examination' => [
+        'title'                     => 'آزمون',
+        'add_new'                   => 'افزودن آزمون جدید',
+        'add_quiz'                  => 'افزودن آزمون',
+        'quiz_deleted'              => 'آزمون حذف شد',
+        'quiz_added'                => 'آزمون به دوره اضافه شد',
+        'fields'                    => [
+            'quiz_link'             => 'لینک آزمون',
+            'quiz_status'           => 'وضعیت آزمون',
+            'quiz_start_datetime'   => 'زمان شروع آزمون',
+            'quiz_end_datetime'     => 'زمان پایان آزمون',
+            'quiz_number_of_attempts' => 'تعداد دفعات مجاز',
+        ]
+    ],
 ];
