@@ -60,7 +60,7 @@
                             @endif
 
                             @if ($course->course_file)
-                            <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_file') }}</h5>
+                                <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_file') }}</h5>
                                 <a href="{{ asset('storage/' . $course->course_file) }}" download
                                     class="btn btn-primary w-100">
                                     {{ __('cruds.course.download_material') }}
@@ -100,23 +100,26 @@
                                 <p class="mt-2">{{ $comment->content }}</p>
 
                                 @auth
-                                <!-- Like Button with icon -->
-                                <form method="POST" action="{{ route('comments.like', $comment->id) }}" class="d-inline-block">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-success btn-sm">
-                                        <i class="fas fa-thumbs-up"></i> Like ({{ $comment->likes->count() }})
-                                    </button>
-                                </form>
+                                    <!-- Like Button with icon -->
+                                    <form method="POST" action="{{ route('comments.like', $comment->id) }}"
+                                        class="d-inline-block">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-success btn-sm">
+                                            <i class="fas fa-thumbs-up"></i> Like ({{ $comment->likes->count() }})
+                                        </button>
+                                    </form>
 
 
-                                <!-- Reply Form -->
-                                <form method="POST" action="{{ route('comments.reply', $comment->id) }}" class="mt-2">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="content" class="form-control form-control-sm" placeholder="Reply..." required>
-                                        <button type="submit" class="btn btn-primary btn-sm">{{ trans('global.reply') }}</button>
-                                    </div>
-                                </form>
+                                    <!-- Reply Form -->
+                                    <form method="POST" action="{{ route('comments.reply', $comment->id) }}" class="mt-2">
+                                        @csrf
+                                        <div class="input-group">
+                                            <input type="text" name="content" class="form-control form-control-sm"
+                                                placeholder="Reply..." required>
+                                            <button type="submit"
+                                                class="btn btn-primary btn-sm">{{ trans('global.reply') }}</button>
+                                        </div>
+                                    </form>
                                 @endauth
 
                                 <!-- Show Replies -->
@@ -137,7 +140,8 @@
                                     <div class="form-group">
                                         <textarea name="content" class="form-control" rows="4" placeholder="Add a comment..." required></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-2">{{ trans('global.post_comment') }}</button>
+                                    <button type="submit"
+                                        class="btn btn-primary mt-2">{{ trans('global.post_comment') }}</button>
                                 </form>
                             </div>
                         @endauth
@@ -226,6 +230,47 @@
                         </div>
                     </div>
 
+                    <div class="card shadow-sm rounded p-3 mb-4">
+                        {{-- Quiz/Examination Section --}}
+                        @if ($course->examinations->count())
+                            <div class="content_wrapper mt-4">
+                                <h5 class="mb-2 text-center">{{ __('cruds.examination.title') }}</h5>
+                                <div class="content">
+                                    @foreach ($course->examinations as $exam)
+                                        <div class="card p-3 mb-3 shadow-sm rounded">
+                                            <h6 class="text-center">{{ __('cruds.examination.fields.quiz_link') }}</h6>
+                                            <a href="{{ $exam->quiz_link }}" target="_blank"
+                                                class="btn btn-outline-primary mb-2">
+                                                {{ __('cruds.examination.access_quiz') }}
+                                            </a>
+
+                                            <ul class="list-unstyled small">
+                                                <li>
+                                                    <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong>
+                                                    <span
+                                                        class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
+                                                        {{ ucfirst($exam->quiz_status) }}
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong>
+                                                    {{ \Carbon\Carbon::parse($exam->quiz_start_datetime)->format('d M Y, H:i') }}
+                                                </li>
+                                                <li>
+                                                    <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong>
+                                                    {{ \Carbon\Carbon::parse($exam->quiz_end_datetime)->format('d M Y, H:i') }}
+                                                </li>
+                                                <li>
+                                                    <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong>
+                                                    {{ $exam->quiz_number_of_attempts }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
     </section>

@@ -173,6 +173,7 @@ return [
         'add_quiz'                  => 'افزودن آزمون',
         'quiz_deleted'              => 'آزمون حذف شد',
         'quiz_added'                => 'آزمون به دوره اضافه شد',
+        'access_quiz'               => 'رفتن به آزمون',
         'fields'                    => [
             'quiz_link'             => 'لینک آزمون',
             'quiz_status'           => 'وضعیت آزمون',

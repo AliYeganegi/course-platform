@@ -175,6 +175,7 @@ return [
         'add_quiz'                  => 'Add Quiz',
         'quiz_deleted'              => 'Quiz Deleted',
         'quiz_added'                => 'Quiz Added To Course',
+        'access_quiz'               => 'Access Quiz',
         'fields'                    => [
             'quiz_link'             => 'Quiz Link',
             'quiz_status'           => 'Quiz Status',
