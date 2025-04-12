@@ -21,7 +21,9 @@ class EmailService
 
     public function sendEnrollmentRequestEmail(Enrollment $enrollment)
     {
-        Mail::to($enrollment->course->instructor->email)->send(new EnrollmentRequest($enrollment));
+        if ($enrollment->course->instructor->email) {
+            Mail::to($enrollment->course->instructor->email)->send(new EnrollmentRequest($enrollment));
+        }
     }
 
     public function sendQuizCreationEmail(Examination $examination)

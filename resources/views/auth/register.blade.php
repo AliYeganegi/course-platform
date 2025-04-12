@@ -5,15 +5,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ trans('global.register') }}</div>
+                    <div class="card-header">
+                        {{ trans('global.register') }}
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.name') }} <span style="color: red;">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
@@ -27,8 +30,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.email') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.email') }} <span style="color: red;">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
@@ -42,12 +46,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="phone_number"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.phone_number') }}</label>
+                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.phone_number') }}
+                                </label>
                                 <div class="col-md-6">
                                     <input id="phone_number" type="text"
                                         class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                        value="{{ old('phone_number') }}" required>
+                                        value="{{ old('phone_number') }}" >
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -57,12 +62,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="date_of_birth"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.date_of_birth') }}</label>
+                                <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.date_of_birth') }}
+                                </label>
                                 <div class="col-md-6">
                                     <input id="date_of_birth" type="date"
                                         class="form-control @error('date_of_birth') is-invalid @enderror"
-                                        name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                                        name="date_of_birth" value="{{ old('date_of_birth') }}">
                                     @error('date_of_birth')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -72,8 +78,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.password') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.password') }} <span style="color: red;">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
@@ -87,8 +94,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ trans('cruds.user.fields.confirm_password') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans('cruds.user.fields.confirm_password') }} <span style="color: red;">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">

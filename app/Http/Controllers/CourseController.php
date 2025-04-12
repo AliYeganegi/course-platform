@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Course;
+use App\Discipline;
 use App\Institution;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,21 @@ class CourseController extends Controller
 
         $breadcrumb = "Courses";
 
-        $institution = Institution::find($request->institution);
+        $discipline = $request->query('discipline');
 
-        $courses = Course::when($institution, function ($query) use ($institution) {
-            return $query->where('institution_id', $institution->id);
-        })->paginate(10);
+        $institutionId = $request->query('institution');
+        $institution = !empty($institutionId) ? Institution::find($institutionId) : null;
+
+        $courses = Course::query()
+            ->when(!empty($discipline), function ($query) use ($discipline) {
+                $query->whereHas('disciplines', function ($q) use ($discipline) {
+                    $q->where('id', $discipline);
+                });
+            })
+            ->when($institution, function ($query) use ($institution) {
+                $query->where('institution_id', $institution->id);
+            })
+            ->paginate(10);
 
         return view('courses.index', compact(['courses', 'breadcrumb', 'institution']));
     }

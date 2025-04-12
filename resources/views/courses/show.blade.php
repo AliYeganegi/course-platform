@@ -3,7 +3,6 @@
 @extends('layouts.main')
 
 @section('content')
-
     <section class="course_details_area section_padding">
         <div class="container">
             <div class="row">
@@ -53,22 +52,24 @@
                     @endphp
                     @if ($status === 'accepted')
                         {{-- Show course link and file --}}
-                        <div class="card shadow-sm rounded p-3 mt-4">
-                            @if ($course->course_link)
-                                <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_link') }}</h5>
-                                <a href="{{ $course->course_link }}" target="_blank" class="btn btn-success w-100 mb-3">
-                                    {{ __('cruds.course.fields.access_course') }}
-                                </a>
-                            @endif
+                        @if ($course->course_link || $course->course_file)
+                            <div class="card shadow-sm rounded p-3 mt-4">
+                                @if ($course->course_link)
+                                    <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_link') }}</h5>
+                                    <a href="{{ $course->course_link }}" target="_blank" class="btn btn-success w-100 mb-3">
+                                        {{ __('cruds.course.fields.access_course') }}
+                                    </a>
+                                @endif
 
-                            @if ($course->course_file)
-                                <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_file') }}</h5>
-                                <a href="{{ asset('storage/' . $course->course_file) }}" download
-                                    class="btn btn-primary w-100">
-                                    {{ __('cruds.course.download_material') }}
-                                </a>
-                            @endif
-                        </div>
+                                @if ($course->course_file)
+                                    <h5 class="mb-2 text-center">{{ __('cruds.course.fields.course_file') }}</h5>
+                                    <a href="{{ asset('storage/' . $course->course_file) }}" download
+                                        class="btn btn-primary w-100">
+                                        {{ __('cruds.course.download_material') }}
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
                     @else
                         {{-- Show Institution, Fee, Enroll --}}
                         <div class="card shadow-sm rounded p-3 mt-4">
@@ -233,7 +234,7 @@
                     </div>
 
                     {{-- Quiz/Examination Section --}}
-                    @if ($course->examinations->count())
+                    @if ($course->examinations->count() && $course->enrollment)
                         <div class="card shadow-sm rounded p-4 mb-4">
                             <div class="content_wrapper mt-4">
                                 <h4 class="mb-4 text-center font-weight-bold">{{ __('cruds.examination.title') }}</h4>
@@ -313,9 +314,7 @@
                             </div>
                         </div>
                     @endif
-
                 </div>
             </div>
     </section>
-
 @endsection

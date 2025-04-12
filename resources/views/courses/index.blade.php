@@ -5,17 +5,18 @@
         <div class="container">
 
             @if ($institution)
-            <div class="row justify-content-center mb-5">
-                <div class="col-xl-10">
-                    <div class="card p-4 shadow-lg text-center">
-                        <h2 class="mb-3">{{ $institution->name }}</h2>
-                        <p class="mb-3 text-muted">{{ $institution->description }}</p>
-                        <img src="{{ optional($institution->logo)->getUrl() ?? asset('img/no_image.png') }}"
-                            alt="Institution Logo" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-xl-10">
+                        <div class="card p-4 shadow-lg text-center">
+                            <h2 class="mb-3">{{ $institution->name }}</h2>
+                            <p class="mb-3 text-muted">{{ $institution->description }}</p>
+                            <img src="{{ optional($institution->logo)->getUrl() ?? asset('img/no_image.png') }}"
+                                alt="Institution Logo" class="img-fluid rounded-circle mb-3"
+                                style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
 
             <div class="row justify-content-center">
@@ -28,8 +29,8 @@
 
             <div class="row">
                 @foreach ($courses as $course)
-                <div class="col-sm-6 col-lg-4 d-flex">
-                    <div class="single_special_cource flex-fill d-flex flex-column mt-5">
+                    <div class="col-sm-6 col-lg-4 d-flex">
+                        <div class="single_special_cource flex-fill d-flex flex-column mt-5">
                             <img src="{{ $course->photo ? $course->photo->getUrl() : asset('img/no_image.png') }}"
                                 class="special_img" alt="">
                             <div class="special_cource_text">

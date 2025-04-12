@@ -59,14 +59,14 @@
                                 <a class="nav-link" href="{{ route('enroll.myCourses') }}">{{ __('main.my_courses') }}</a>
                             </li>
                             <li class="d-none d-lg-block">
-                                <a class="btn_1" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
+                                <a class="btn_1" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">{{ trans('global.logout') }}</a>
                                 <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </li>
                         @else
                             <li class="d-none d-lg-block">
-                                <a class="btn_1" href="{{ route('login') }}">Login</a>
+                                <a class="btn_1" href="{{ route('login') }}">{{ trans('global.login') }}</a>
                             </li>
                         @endauth
 
