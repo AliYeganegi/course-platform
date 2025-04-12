@@ -256,30 +256,68 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <tbody>
                                             @foreach ($course->examinations as $exam)
                                                 <tr>
-                                                    <td><a href="{{ $exam->quiz_link }}"
-                                                            target="_blank">{{ $exam->quiz_link }}</a></td>
-                                                    <td>{{ ucfirst($exam->quiz_status) }}</td>
-                                                    <td>{{ $exam->quiz_start_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_start_datetime)) : '' }}
-                                                    </td>
-                                                    <td>{{ $exam->quiz_end_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_end_datetime)) : '' }}
-                                                    </td>
-                                                    <td>{{ $exam->quiz_number_of_attempts }}</td>
-                                                    <td>
-                                                        <form
-                                                            action="{{ route('admin.examinations.destroy', $exam->id) }}"
-                                                            method="POST" style="display: inline-block;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger"
-                                                                onclick="return confirm('{{ trans('global.areYouSure') }}')">
-                                                                {{ trans('global.delete') }}
-                                                            </button>
-                                                        </form>
+                                                    <form action="{{ route('admin.examinations.update', $exam->id) }}"
+                                                        onsubmit="return confirm('{{ trans('global.areYouSure') }}')"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="course_id"
+                                                            value="{{ $course->id }}">
+
+                                                        <td>
+                                                            <input type="url" name="quiz_link" class="form-control"
+                                                                value="{{ old('quiz_link', $exam->quiz_link) }}">
+                                                        </td>
+                                                        <td>
+                                                            <select name="quiz_status" class="form-control">
+                                                                <option value="active"
+                                                                    {{ $exam->quiz_status == 'active' ? 'selected' : '' }}>
+                                                                    Active</option>
+                                                                <option value="inactive"
+                                                                    {{ $exam->quiz_status == 'inactive' ? 'selected' : '' }}>
+                                                                    Inactive</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="datetime-local" name="quiz_start_datetime"
+                                                                class="form-control"
+                                                                value="{{ old('quiz_start_datetime', \Carbon\Carbon::parse($exam->quiz_start_datetime)->format('Y-m-d\TH:i')) }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="datetime-local" name="quiz_end_datetime"
+                                                                class="form-control"
+                                                                value="{{ old('quiz_end_datetime', \Carbon\Carbon::parse($exam->quiz_end_datetime)->format('Y-m-d\TH:i')) }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="quiz_number_of_attempts"
+                                                                class="form-control"
+                                                                value="{{ old('quiz_number_of_attempts', $exam->quiz_number_of_attempts) }}"
+                                                                min="1">
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex gap-1">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary">{{ trans('global.update') }}</button>
+                                                            </div>
+                                                    </form>
+
+                                                    <form action="{{ route('admin.examinations.destroy', $exam->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('{{ trans('global.areYouSure') }}')"
+                                                        style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger">{{ trans('global.delete') }}</button>
+                                                    </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
+                                        </tbody>
+
                                         </tbody>
                                     </table>
                                 </div>

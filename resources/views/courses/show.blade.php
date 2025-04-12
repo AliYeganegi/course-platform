@@ -237,36 +237,46 @@
                                 <h5 class="mb-2 text-center">{{ __('cruds.examination.title') }}</h5>
                                 <div class="content">
                                     @foreach ($course->examinations as $exam)
-                                        <div class="card p-3 mb-3 shadow-sm rounded">
-                                            <h6 class="text-center">{{ __('cruds.examination.fields.quiz_link') }}</h6>
-                                            <a href="{{ $exam->quiz_link }}" target="_blank"
-                                                class="btn btn-outline-primary mb-2">
-                                                {{ __('cruds.examination.access_quiz') }}
-                                            </a>
+                                    <div class="card p-3 mb-3 shadow-sm rounded">
+                                        <h6 class="text-center">{{ __('cruds.examination.fields.quiz_link') }}</h6>
 
-                                            <ul class="list-unstyled small">
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong>
-                                                    <span
-                                                        class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
-                                                        {{ ucfirst($exam->quiz_status) }}
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong>
-                                                    {{ \Carbon\Carbon::parse($exam->quiz_start_datetime)->format('d M Y, H:i') }}
-                                                </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong>
-                                                    {{ \Carbon\Carbon::parse($exam->quiz_end_datetime)->format('d M Y, H:i') }}
-                                                </li>
-                                                <li>
-                                                    <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong>
-                                                    {{ $exam->quiz_number_of_attempts }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    @endforeach
+                                        @php
+                                            $now = \Carbon\Carbon::now();
+                                            $start = \Carbon\Carbon::parse($exam->quiz_start_datetime);
+                                            $end = \Carbon\Carbon::parse($exam->quiz_end_datetime);
+                                            $isAccessible = $now->between($start, $end);
+                                        @endphp
+
+                                        <a href="{{ $isAccessible ? $exam->quiz_link : '#' }}"
+                                           target="{{ $isAccessible ? '_blank' : '_self' }}"
+                                           class="btn btn-outline-primary mb-2 {{ $isAccessible ? '' : 'disabled' }}"
+                                           {{ $isAccessible ? '' : 'aria-disabled=true' }}>
+                                            {{ __('cruds.examination.access_quiz') }}
+                                        </a>
+
+                                        <ul class="list-unstyled small">
+                                            <li>
+                                                <strong>{{ __('cruds.examination.fields.quiz_status') }}:</strong>
+                                                <span class="badge bg-{{ $exam->quiz_status === 'active' ? 'success' : 'secondary' }}">
+                                                    {{ ucfirst($exam->quiz_status) }}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ __('cruds.examination.fields.quiz_start_datetime') }}:</strong>
+                                                {{ $start->format('d M Y, H:i') }}
+                                            </li>
+                                            <li>
+                                                <strong>{{ __('cruds.examination.fields.quiz_end_datetime') }}:</strong>
+                                                {{ $end->format('d M Y, H:i') }}
+                                            </li>
+                                            <li>
+                                                <strong>{{ __('cruds.examination.fields.quiz_number_of_attempts') }}:</strong>
+                                                {{ $exam->quiz_number_of_attempts }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+
                                 </div>
                             </div>
                         @endif

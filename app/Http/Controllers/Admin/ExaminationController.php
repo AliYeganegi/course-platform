@@ -32,6 +32,22 @@ class ExaminationController extends Controller
             ->with('message', trans('cruds.examination.quiz_added'));
     }
 
+    public function update(Request $request, Examination $examination)
+    {
+        $request->validate([
+            'quiz_link' => 'required|url',
+            'quiz_status' => 'required|in:active,inactive',
+            'quiz_start_datetime' => 'nullable|date',
+            'quiz_end_datetime' => 'nullable|date|after_or_equal:quiz_start_datetime',
+            'quiz_number_of_attempts' => 'required|integer|min:1',
+        ]);
+
+        $examination->update($request->all());
+
+        return redirect()->back()->with('message', trans('cruds.examination.quiz_updated'));
+    }
+
+
     public function destroy(Examination $examination)
     {
         $courseId = $examination->course_id;

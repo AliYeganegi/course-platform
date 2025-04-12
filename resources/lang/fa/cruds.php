@@ -174,6 +174,7 @@ return [
         'quiz_deleted'              => 'آزمون حذف شد',
         'quiz_added'                => 'آزمون به دوره اضافه شد',
         'access_quiz'               => 'رفتن به آزمون',
+        'quiz_updated'              => 'آزمون به روز رسانی شد',
         'fields'                    => [
             'quiz_link'             => 'لینک آزمون',
             'quiz_status'           => 'وضعیت آزمون',
