@@ -278,19 +278,21 @@
                                                                 placeholder="Exam Name" style="min-width: 200px;">
                                                         </td>
                                                         <td>
-                                                            <textarea name="description" style="min-width: 200px;" class="form-control" rows="2" placeholder="Description">{{ old('description', $exam->description) }}</textarea>
+                                                            <textarea name="description" style="min-width: 200px;" class="form-control" rows="2"
+                                                                placeholder="Description">{{ old('description', $exam->description) }}</textarea>
                                                         </td>
                                                         <td>
                                                             <input type="number" name="number_of_questions"
                                                                 class="form-control"
                                                                 value="{{ old('number_of_questions', $exam->number_of_questions) }}"
-                                                                min="1"  style="min-width: 200px;">
+                                                                min="1" style="min-width: 200px;">
                                                         </td>
                                                         <td>
                                                             <input type="number" name="exam_duration"
                                                                 class="form-control"
                                                                 value="{{ old('exam_duration', $exam->exam_duration) }}"
-                                                                min="1" placeholder="In minutes" style="min-width: 200px;">
+                                                                min="1" placeholder="In minutes"
+                                                                style="min-width: 200px;">
                                                         </td>
                                                         <td>
                                                             <input type="number" name="total_point" class="form-control"
@@ -300,10 +302,12 @@
 
                                                         <td>
                                                             <input type="url" name="quiz_link" class="form-control"
-                                                                value="{{ old('quiz_link', $exam->quiz_link) }}" style="min-width: 200px;">
+                                                                value="{{ old('quiz_link', $exam->quiz_link) }}"
+                                                                style="min-width: 200px;">
                                                         </td>
                                                         <td>
-                                                            <select name="quiz_status" class="form-control"  style="min-width: 200px;">
+                                                            <select name="quiz_status" class="form-control"
+                                                                style="min-width: 200px;">
                                                                 <option value="active"
                                                                     {{ $exam->quiz_status == 'active' ? 'selected' : '' }}>
                                                                     Active</option>
@@ -324,7 +328,7 @@
                                                         </td>
                                                         <td>
                                                             <input type="number" name="quiz_number_of_attempts"
-                                                                class="form-control"  style="min-width: 200px;"
+                                                                class="form-control" style="min-width: 200px;"
                                                                 value="{{ old('quiz_number_of_attempts', $exam->quiz_number_of_attempts) }}"
                                                                 min="1">
                                                         </td>
@@ -359,109 +363,99 @@
                             <!-- Add new examination -->
                             <h5 class="mt-3">{{ trans('cruds.examination.add_new') }}</h5>
 
-                            <form action="{{ route('admin.examinations.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                            <!-- Toggle Button -->
+                            <button class="btn btn-sm btn-success mb-3" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#newExamForm" aria-expanded="false" aria-controls="newExamForm">
+                                {{ trans('cruds.examination.add_new') }}
+                            </button>
 
-                                <div class="form-group">
-                                    <label for="name">{{ trans('cruds.examination.fields.name') }}</label>
-                                    <input type="text" id="name" name="name" class="form-control" value="{{ old('name', '') }}">
-                                </div>
+                            <!-- Collapsible Form Section -->
+                            <div class="collapse" id="newExamForm">
+                                <form action="{{ route('admin.examinations.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="course_id" value="{{ $course->id }}">
 
-                                <div class="form-group">
-                                    <label for="description">{{ trans('cruds.examination.fields.description') }}</label>
-                                    <textarea id="description" name="description" class="form-control" rows="3">{{ old('description', '') }}</textarea>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="name">{{ trans('cruds.examination.fields.name') }}</label>
+                                        <input type="text" id="name" name="name" class="form-control"
+                                            value="{{ old('name', '') }}">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="number_of_questions">{{ trans('cruds.examination.fields.number_of_questions') }}</label>
-                                    <input type="number" id="number_of_questions" name="number_of_questions" class="form-control"
-                                           value="{{ old('number_of_questions', 10) }}" min="1">
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="description">{{ trans('cruds.examination.fields.description') }}</label>
+                                        <textarea id="description" name="description" class="form-control" rows="3">{{ old('description', '') }}</textarea>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="exam_duration">{{ trans('cruds.examination.fields.exam_duration') }}</label>
-                                    <input type="number" id="exam_duration" name="exam_duration" class="form-control"
-                                           value="{{ old('exam_duration', 30) }}" min="1">
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="number_of_questions">{{ trans('cruds.examination.fields.number_of_questions') }}</label>
+                                        <input type="number" id="number_of_questions" name="number_of_questions"
+                                            class="form-control" value="{{ old('number_of_questions', 10) }}"
+                                            min="1">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="total_point">{{ trans('cruds.examination.fields.total_point') }}</label>
-                                    <input type="number" id="total_point" name="total_point" class="form-control"
-                                           value="{{ old('total_point', 100) }}" min="0" step="0.01">
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="exam_duration">{{ trans('cruds.examination.fields.exam_duration') }}</label>
+                                        <input type="number" id="exam_duration" name="exam_duration"
+                                            class="form-control" value="{{ old('exam_duration', 30) }}" min="1">
+                                    </div>
 
-                                <div class="form-group {{ $errors->has('quiz_link') ? 'has-error' : '' }}">
-                                    <label for="quiz_link">{{ trans('cruds.examination.fields.quiz_link') }}</label>
-                                    <input type="url" id="quiz_link" name="quiz_link" class="form-control"
-                                        value="{{ old('quiz_link', '') }}">
-                                    @if ($errors->has('quiz_link'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('quiz_link') }}
-                                        </em>
-                                    @endif
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="total_point">{{ trans('cruds.examination.fields.total_point') }}</label>
+                                        <input type="number" id="total_point" name="total_point" class="form-control"
+                                            value="{{ old('total_point', 100) }}" min="0" step="0.01">
+                                    </div>
 
-                                <div class="form-group {{ $errors->has('quiz_status') ? 'has-error' : '' }}">
-                                    <label for="quiz_status">{{ trans('cruds.examination.fields.quiz_status') }}</label>
-                                    <select name="quiz_status" id="quiz_status" class="form-control">
-                                        <option value="active" {{ old('quiz_status') == 'active' ? 'selected' : '' }}>
-                                            Active
-                                        </option>
-                                        <option value="inactive"
-                                            {{ old('quiz_status', 'inactive') == 'inactive' ? 'selected' : '' }}>Inactive
-                                        </option>
-                                    </select>
-                                    @if ($errors->has('quiz_status'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('quiz_status') }}
-                                        </em>
-                                    @endif
-                                </div>
+                                    <div class="form-group">
+                                        <label for="quiz_link">{{ trans('cruds.examination.fields.quiz_link') }}</label>
+                                        <input type="url" id="quiz_link" name="quiz_link" class="form-control"
+                                            value="{{ old('quiz_link', '') }}">
+                                    </div>
 
-                                <div class="form-group {{ $errors->has('quiz_start_datetime') ? 'has-error' : '' }}">
-                                    <label
-                                        for="quiz_start_datetime">{{ trans('cruds.examination.fields.quiz_start_datetime') }}</label>
-                                    <input type="datetime-local" id="quiz_start_datetime" name="quiz_start_datetime"
-                                        class="form-control" value="{{ old('quiz_start_datetime', '') }}">
-                                    @if ($errors->has('quiz_start_datetime'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('quiz_start_datetime') }}
-                                        </em>
-                                    @endif
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="quiz_status">{{ trans('cruds.examination.fields.quiz_status') }}</label>
+                                        <select name="quiz_status" id="quiz_status" class="form-control">
+                                            <option value="active"
+                                                {{ old('quiz_status') == 'active' ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive"
+                                                {{ old('quiz_status', 'inactive') == 'inactive' ? 'selected' : '' }}>
+                                                Inactive</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group {{ $errors->has('quiz_end_datetime') ? 'has-error' : '' }}">
-                                    <label
-                                        for="quiz_end_datetime">{{ trans('cruds.examination.fields.quiz_end_datetime') }}</label>
-                                    <input type="datetime-local" id="quiz_end_datetime" name="quiz_end_datetime"
-                                        class="form-control" value="{{ old('quiz_end_datetime', '') }}">
-                                    @if ($errors->has('quiz_end_datetime'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('quiz_end_datetime') }}
-                                        </em>
-                                    @endif
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="quiz_start_datetime">{{ trans('cruds.examination.fields.quiz_start_datetime') }}</label>
+                                        <input type="datetime-local" id="quiz_start_datetime" name="quiz_start_datetime"
+                                            class="form-control" value="{{ old('quiz_start_datetime', '') }}">
+                                    </div>
 
-                                <div class="form-group {{ $errors->has('quiz_number_of_attempts') ? 'has-error' : '' }}">
-                                    <label
-                                        for="quiz_number_of_attempts">{{ trans('cruds.examination.fields.quiz_number_of_attempts') }}</label>
-                                    <input type="number" id="quiz_number_of_attempts" name="quiz_number_of_attempts"
-                                        class="form-control" value="{{ old('quiz_number_of_attempts', 1) }}"
-                                        min="1">
-                                    @if ($errors->has('quiz_number_of_attempts'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('quiz_number_of_attempts') }}
-                                        </em>
-                                    @endif
-                                </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="quiz_end_datetime">{{ trans('cruds.examination.fields.quiz_end_datetime') }}</label>
+                                        <input type="datetime-local" id="quiz_end_datetime" name="quiz_end_datetime"
+                                            class="form-control" value="{{ old('quiz_end_datetime', '') }}">
+                                    </div>
 
-                                <div>
-                                    <button type="submit" class="btn btn-success">
-                                        {{ trans('cruds.examination.add_quiz') }}
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        <label
+                                            for="quiz_number_of_attempts">{{ trans('cruds.examination.fields.quiz_number_of_attempts') }}</label>
+                                        <input type="number" id="quiz_number_of_attempts" name="quiz_number_of_attempts"
+                                            class="form-control" value="{{ old('quiz_number_of_attempts', 1) }}"
+                                            min="1">
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" class="btn btn-success mt-2">
+                                            {{ trans('cruds.examination.add_quiz') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -473,6 +467,7 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         Dropzone.options.photoDropzone = {
             url: '{{ route('admin.courses.storeMedia') }}',
