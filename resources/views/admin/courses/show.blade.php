@@ -128,6 +128,40 @@
                 </a>
             </div>
 
+            <!-- Quizzes Section -->
+            @if ($course->examinations && $course->examinations->count() > 0)
+                <div class="mt-5">
+                    <h5>{{ trans('cruds.examination.title') }}</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{{ trans('cruds.examination.fields.quiz_link') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.quiz_status') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.quiz_start_datetime') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.quiz_end_datetime') }}</th>
+                                    <th>{{ trans('cruds.examination.fields.quiz_number_of_attempts') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($course->examinations as $exam)
+                                    <tr>
+                                        <td><a href="{{ $exam->quiz_link }}" target="_blank">{{ $exam->quiz_link }}</a>
+                                        </td>
+                                        <td>{{ ucfirst($exam->quiz_status) }}</td>
+                                        <td>{{ $exam->quiz_start_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_start_datetime)) : '' }}
+                                        </td>
+                                        <td>{{ $exam->quiz_end_datetime ? date('Y-m-d H:i', strtotime($exam->quiz_end_datetime)) : '' }}
+                                        </td>
+                                        <td>{{ $exam->quiz_number_of_attempts }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+
             <!-- Comments Section -->
             <div class="mt-4">
                 <h5>Comments</h5>
@@ -182,7 +216,6 @@
                     </div>
                 @endforeach
             </div>
-
             @auth
                 <div class="card p-3 mt-4 shadow-sm rounded">
                     <h6>Post a Comment</h6>
