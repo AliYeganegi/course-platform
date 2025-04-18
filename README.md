@@ -28,7 +28,7 @@ A Laravel-based online course management platform that allows administrators to 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/course-platform.git
+   git clone https://github.com/AliYeganegi/course-platform.git
    cd course-platform
    ```
 
